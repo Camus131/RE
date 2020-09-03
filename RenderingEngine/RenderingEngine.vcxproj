@@ -94,8 +94,11 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../Dependencies/lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glad/glad64.lib;assimp/assimp-vc142-mt64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y/r ..\Dependencies\bin\assimp\assimp-vc142-mt64.dll ..\$(Platform)\$(Configuration)\</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -110,8 +113,11 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../Dependencies/lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glad/glad64.lib;assimp/assimp-vc142-mt64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y/r ..\Dependencies\bin\assimp\assimp-vc142-mt64.dll ..\$(Platform)\$(Configuration)\</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -130,8 +136,11 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../Dependencies/lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glad/glad64.lib;assimp/assimp-vc142-mt64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y/r ..\Dependencies\bin\assimp\assimp-vc142-mt64.dll ..\$(Platform)\$(Configuration)\</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -150,38 +159,69 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../Dependencies/lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glad/glad64.lib;assimp/assimp-vc142-mt64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y/r ..\Dependencies\bin\assimp\assimp-vc142-mt64.dll ..\$(Platform)\$(Configuration)\</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Core\DrawArrays.cpp" />
-    <ClCompile Include="src\Core\DrawElements.cpp" />
-    <ClCompile Include="src\Core\Image.cpp" />
-    <ClCompile Include="src\Core\Shader.cpp" />
-    <ClCompile Include="src\Core\Texture2D.cpp" />
+    <ClCompile Include="src\Core\DrawingCall.cpp" />
+    <ClCompile Include="src\Core\MeshVisitor.cpp" />
+    <ClCompile Include="src\Core\Renderer.cpp" />
+    <ClCompile Include="src\Core\UniformList.cpp" />
+    <ClCompile Include="src\Object\DrawArrays.cpp" />
+    <ClCompile Include="src\Object\DrawElements.cpp" />
+    <ClCompile Include="src\Object\Image.cpp" />
+    <ClCompile Include="src\Core\IndexBuffer.cpp" />
+    <ClCompile Include="src\Object\Light.cpp" />
+    <ClCompile Include="src\Object\Material.cpp" />
+    <ClCompile Include="src\Object\Mesh.cpp" />
+    <ClCompile Include="src\Object\Program.cpp" />
+    <ClCompile Include="src\Object\Shader.cpp" />
+    <ClCompile Include="src\Core\ShaderSource.cpp" />
+    <ClCompile Include="src\Core\Texture2DSource.cpp" />
+    <ClCompile Include="src\Object\State.cpp" />
+    <ClCompile Include="src\Object\Uniform.cpp" />
     <ClCompile Include="src\Core\VertexBuffer.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Object\Texture2D.cpp" />
     <ClCompile Include="src\Scene\FPSCamera.cpp" />
+    <ClCompile Include="src\ReadFile\Model.cpp" />
     <ClCompile Include="src\ThirdParty\stb_image.cpp" />
+    <ClCompile Include="src\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Core\Buffer.h" />
-    <ClInclude Include="src\Core\DrawArrays.h" />
-    <ClInclude Include="src\Core\DrawCallSet.h" />
-    <ClInclude Include="src\Core\DrawElements.h" />
-    <ClInclude Include="src\Core\GLObject.h" />
-    <ClInclude Include="src\Core\Header.h" />
-    <ClInclude Include="src\Core\Image.h" />
+    <ClInclude Include="src\Core\DrawingCall.h" />
+    <ClInclude Include="src\Core\MeshVisitor.h" />
+    <ClInclude Include="src\Core\Renderer.h" />
+    <ClInclude Include="src\Core\RenderingUnit.h" />
+    <ClInclude Include="src\Core\UniformList.h" />
+    <ClInclude Include="src\Object\DrawArrays.h" />
+    <ClInclude Include="src\Object\DrawElements.h" />
+    <ClInclude Include="src\Core\Object.h" />
+    <ClInclude Include="src\Object\DrawingSet.h" />
+    <ClInclude Include="src\Object\Image.h" />
     <ClInclude Include="src\Core\IndexBuffer.h" />
-    <ClInclude Include="src\Core\Shader.h" />
-    <ClInclude Include="src\Core\Texture.h" />
-    <ClInclude Include="src\Core\Texture2D.h" />
+    <ClInclude Include="src\Core\ContextObject.h" />
+    <ClInclude Include="src\Object\Light.h" />
+    <ClInclude Include="src\Object\Material.h" />
+    <ClInclude Include="src\Object\Mesh.h" />
+    <ClInclude Include="src\Object\Program.h" />
+    <ClInclude Include="src\Object\Shader.h" />
+    <ClInclude Include="src\Core\ShaderSource.h" />
+    <ClInclude Include="src\Object\State.h" />
+    <ClInclude Include="src\Object\Texture.h" />
+    <ClInclude Include="src\Core\Texture2DSource.h" />
+    <ClInclude Include="src\Object\Uniform.h" />
     <ClInclude Include="src\Core\VertexArray.h" />
     <ClInclude Include="src\Core\VertexAttribute.h" />
     <ClInclude Include="src\Core\VertexBuffer.h" />
+    <ClInclude Include="src\Core\Visitor.h" />
     <ClInclude Include="src\Math\EulerAngles.h" />
     <ClInclude Include="src\Math\Math.h" />
     <ClInclude Include="src\Math\Matrixd.h" />
@@ -193,8 +233,12 @@
     <ClInclude Include="src\Math\Vec3f.h" />
     <ClInclude Include="src\Math\Vec4d.h" />
     <ClInclude Include="src\Math\Vec4f.h" />
+    <ClInclude Include="src\Object\ExternalObject.h" />
+    <ClInclude Include="src\Object\Texture2D.h" />
     <ClInclude Include="src\Scene\FPSCamera.h" />
+    <ClInclude Include="src\ReadFile\Model.h" />
     <ClInclude Include="src\ThirdParty\stb_image.h" />
+    <ClInclude Include="src\Window\Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

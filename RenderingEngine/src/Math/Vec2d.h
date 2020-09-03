@@ -101,7 +101,7 @@ namespace OGE
 
         Vec2d operator - () const { return Vec2d(-v_[0], -v_[1]); }
 
-        bool operator == (const Vec2d& v) const { return v_[0] == v.v_[0] && v_[1] == v.v_[1]; }
+        bool operator == (const Vec2d& v) const { return OGE::IsEqual(v_[0], v.v_[0]) && OGE::IsEqual(v_[1], v.v_[1]); }
 
         bool operator != (const Vec2d& v) const { return v_[0] != v.v_[0] || v_[1] != v.v_[1]; }
 

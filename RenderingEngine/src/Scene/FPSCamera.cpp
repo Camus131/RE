@@ -13,7 +13,7 @@ namespace OGE
 		SetFov(fov);
 		SetSpeed(movement_speed);
 		SetSensitivity(sensitivity);
-		update();
+		Update();
 	}
 
 
@@ -52,7 +52,7 @@ namespace OGE
 		if (euler_angles_.pitch_ < -89.0f)
 			euler_angles_.pitch_ = -89.0f;
 
-		update();
+		Update();
 	}
 
 
@@ -60,7 +60,7 @@ namespace OGE
 	{
 		position_ = default_position_;
 		euler_angles_.Identity();
-		update();
+		Update();
 	}
 
 
@@ -94,7 +94,7 @@ namespace OGE
 	}
 
 
-	void FPSCamera::update()
+	void FPSCamera::Update()
 	{
 		front_ = euler_angles_.ToMatrix() * default_front_;
 		right_ = front_ ^ default_up_;

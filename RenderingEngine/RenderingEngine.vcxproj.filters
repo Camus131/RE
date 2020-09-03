@@ -21,25 +21,70 @@
     <ClCompile Include="src\Core\VertexBuffer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\Core\Shader.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\DrawArrays.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\DrawElements.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Texture2D.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\Image.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="src\ThirdParty\stb_image.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\Scene\FPSCamera.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReadFile\Model.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\IndexBuffer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\ShaderSource.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Shader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Program.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Image.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Texture2D.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Uniform.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\State.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Material.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Light.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Mesh.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\DrawElements.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\DrawArrays.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\MeshVisitor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Texture2DSource.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Renderer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\DrawingCall.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\UniformList.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Window\Window.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,9 +92,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Core\GLObject.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="src\Core\Buffer.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -89,9 +131,6 @@
     <ClInclude Include="src\Core\IndexBuffer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\Core\Shader.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="src\Math\EulerAngles.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -101,31 +140,88 @@
     <ClInclude Include="src\Core\VertexArray.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\Core\DrawCallSet.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\DrawArrays.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\DrawElements.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Texture.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Texture2D.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Image.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="src\ThirdParty\stb_image.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\Core\Header.h">
+    <ClInclude Include="src\Scene\FPSCamera.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\Scene\FPSCamera.h">
+    <ClInclude Include="src\ReadFile\Model.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\ShaderSource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\ContextObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Object.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\ExternalObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Visitor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Shader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Program.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Image.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Texture2D.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Uniform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\State.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Material.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Light.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Mesh.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\DrawingSet.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\DrawElements.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\DrawArrays.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\MeshVisitor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Texture2DSource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Renderer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\RenderingUnit.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\DrawingCall.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\UniformList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Window\Window.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

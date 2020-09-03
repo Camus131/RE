@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include "Math.h"
 
 
@@ -102,7 +104,7 @@ namespace OGE
 
         Vec3f operator - () const { return Vec3f(-v_[0], -v_[1], -v_[2]); }
 
-        bool operator == (const Vec3f& v) const { return v_[0] == v.v_[0] && v_[1] == v.v_[1] && v_[2] == v.v_[2]; }
+        bool operator == (const Vec3f& v) const { return OGE::IsEqual(v_[0], v.v_[0]) && OGE::IsEqual(v_[1], v.v_[1]) && OGE::IsEqual(v_[2], v.v_[2]); }
 
         bool operator != (const Vec3f& v) const { return v_[0] != v.v_[0] || v_[1] != v.v_[1] || v_[2] != v.v_[2]; }
 
@@ -175,6 +177,7 @@ namespace OGE
     };
 
     typedef Vec3f Vec3;
+    typedef std::vector<Vec3> Vec3Array;
 
     //轴向单位向量
     const Vec3 X_AXIS(1.0f, 0.0f, 0.0f);

@@ -118,7 +118,11 @@ namespace OGE
 
         Vec4f operator - () const { return Vec4f(-v_[0], -v_[1], -v_[2], -v_[3]); }
 
-        bool operator == (const Vec4f& v) const { return v_[0] == v.v_[0] && v_[1] == v.v_[1] && v_[2] == v.v_[2] && v_[3] == v.v_[3]; }
+        bool operator == (const Vec4f& v) const 
+        {
+            return OGE::IsEqual(v_[0], v.v_[0]) && OGE::IsEqual(v_[1], v.v_[1]) &&
+                OGE::IsEqual(v_[2], v.v_[2]) && OGE::IsEqual(v_[3], v.v_[3]);
+        };
 
         bool operator != (const Vec4f& v) const { return v_[0] != v.v_[0] || v_[1] != v.v_[1] || v_[2] != v.v_[2] || v_[3] != v.v_[3]; }
 
@@ -176,4 +180,5 @@ namespace OGE
     };
 
     typedef Vec4f Vec4;
+    typedef std::vector<Vec4> Vec4Array;
 }

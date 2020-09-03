@@ -41,6 +41,10 @@ namespace OGE
 	template<typename T>
 	inline T Absolute(T v) { return v < (T)0 ? -v : v; }
 
+	//平方
+	template<typename T>
+	inline T Square(T v) { return v * v; }
+
 	//浮点数开方
 	inline float Sqrt(float v) { return sqrtf(v); }
 	inline double Sqrt(double v) { return sqrt(v); }

@@ -146,7 +146,11 @@ namespace OGE
 
         Vec4d operator - () const { return Vec4d(-v_[0], -v_[1], -v_[2], -v_[3]); }
 
-        bool operator == (const Vec4d& v) const { return v_[0] == v.v_[0] && v_[1] == v.v_[1] && v_[2] == v.v_[2] && v_[3] == v.v_[3]; }
+        bool operator == (const Vec4d& v) const 
+        {
+            return OGE::IsEqual(v_[0], v.v_[0]) && OGE::IsEqual(v_[1], v.v_[1]) &&
+                OGE::IsEqual(v_[2], v.v_[2]) && OGE::IsEqual(v_[3], v.v_[3]);
+        };
 
         bool operator != (const Vec4d& v) const { return v_[0] != v.v_[0] || v_[1] != v.v_[1] || v_[2] != v.v_[2] || v_[3] != v.v_[3]; }
 

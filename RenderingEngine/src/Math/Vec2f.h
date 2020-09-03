@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include "Math.h"
 
 
@@ -87,7 +89,7 @@ namespace OGE
 
         Vec2f operator - () const { return Vec2f(-v_[0], -v_[1]); }
 
-        bool operator == (const Vec2f& v) const { return v_[0] == v.v_[0] && v_[1] == v.v_[1]; }
+        bool operator == (const Vec2f& v) const { return OGE::IsEqual(v_[0], v.v_[0]) && OGE::IsEqual(v_[1], v.v_[1]); }
 
         bool operator != (const Vec2f& v) const { return v_[0] != v.v_[0] || v_[1] != v.v_[1]; }
 
@@ -149,4 +151,5 @@ namespace OGE
     };
 
     typedef Vec2f Vec2;
+    typedef std::vector<Vec2> Vec2Array;
 }

@@ -48,7 +48,7 @@ namespace OGE
         Vec3 GetPosition()const { return position_; }
 
     private:
-        void update();
+        void Update();
 
     private:
         // µ ±Œª÷√

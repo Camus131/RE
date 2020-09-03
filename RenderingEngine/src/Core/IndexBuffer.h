@@ -1,90 +1,130 @@
 #pragma once
 
-#include <vector>
-
 #include "Buffer.h"
-#include "../Math/Math.h"
 
 
 namespace OGE
 {
-	template<typename VT>
-	class IndexBufferTL :public Buffer
+	class IndexBuffer :public Buffer
 	{
 	public:
-		typedef VT value_type;
+		//重新分配缓存，开销较大，size为缓存大小
+		void ResetMemory(int size, Type type = STATIC_DRAW);
+
+	protected:
+		IndexBuffer() :
+			Buffer() {}
+	};
+
+
+	class IndexBufferUByte :public IndexBuffer
+	{
+	public:
+		typedef unsigned char value_type;
 
 		//创建实例
-		//indices为要发送的顶点数据，size为开辟的缓存大小
-		static SPtr(IndexBufferTL<VT>) Create(const std::vector<value_type>& indices, int size, Type type = STATIC_DRAW)
+		//size为缓存大小
+		static SPtr(IndexBufferUByte) Create(int size = 0, Type type = STATIC_DRAW)
 		{
-			return SPtr(IndexBufferTL<VT>)(new IndexBufferTL(indices, size, type));
+			return SPtr(IndexBufferUByte)(new IndexBufferUByte(size, type));
 		}
-
-		//创建实例
-		//indices为要发送的顶点数据，length为indices的长度，size为开辟的缓存大小
-		static SPtr(IndexBufferTL<VT>) Create(const value_type* indices, int length, int size, Type type = STATIC_DRAW)
+		//indices为要发送的顶点数据，size为缓存大小
+		static SPtr(IndexBufferUByte) Create(const std::vector<value_type>& indices, int size = 0, Type type = STATIC_DRAW)
 		{
-			return SPtr(IndexBufferTL<VT>)(new IndexBufferTL(indices, length, size, type));
+			return SPtr(IndexBufferUByte)(new IndexBufferUByte(indices, size, type));
 		}
-
-		~IndexBufferTL() { glDeleteBuffers(1, &id_); }
+		//indices为要发送的顶点数据，length为indices的长度，size为缓存大小
+		static SPtr(IndexBufferUByte) Create(const value_type* indices, int length, int size = 0, Type type = STATIC_DRAW)
+		{
+			return SPtr(IndexBufferUByte)(new IndexBufferUByte(indices, length, size, type));
+		}
 
 		void Bind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_); }
 		void UnBind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
 
 		//更新缓存中的数据，返回false表示数据内容超出了缓存空间大小，更新失败
 		//使用前需调用Bind()
-		bool UpdateData(const std::vector<value_type>& indices, int offset = 0)
-		{
-			int data_size = indices.size() * sizeof(value_type);
-			if (data_size + offset > size_)
-				return false;
+		bool UpdateData(const std::vector<value_type>& indices, int offset = 0);
 
-			glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, offset, data_size, &indices[0]);
-			return true;
-		}
-
-		//重新分配缓存，开销较大
-		//使用前需调用Bind()
-		void ResetMemory(int size, Type type = STATIC_DRAW)
-		{
-			size_ = size;
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, size_, nullptr, type);
-		}
-
-	private:
-		IndexBufferTL(const std::vector<value_type>& indices, int size, Type type = STATIC_DRAW) :
-			Buffer()
-		{
-			int data_size = indices.size() * sizeof(value_type);
-			size_ = OGE::Maximum(data_size, size);
-
-			glGenBuffers(1, &id_);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, size_, nullptr, type);
-			glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, data_size, &indices[0]);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-		}
-
-		IndexBufferTL(const value_type* indices, int length, int size, Type type = STATIC_DRAW) :
-			Buffer()
-		{
-			int data_size = length * sizeof(value_type);
-			size_ = OGE::Maximum(data_size, size);
-
-			glGenBuffers(1, &id_);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_);
-			glBufferData(GL_ELEMENT_ARRAY_BUFFER, size_, nullptr, type);
-			glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, data_size, indices);
-			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-		}
+	protected:
+		IndexBufferUByte(int size = 0, Type type = STATIC_DRAW);
+		IndexBufferUByte(const std::vector<value_type>& indices, int size = 0, Type type = STATIC_DRAW);
+		IndexBufferUByte(const value_type* indices, int length, int size = 0, Type type = STATIC_DRAW);
 	};
 
-	typedef IndexBufferTL<unsigned char>	IndexBufferUByte;
-	typedef IndexBufferTL<unsigned short>	IndexBufferUShort;
-	typedef IndexBufferTL<unsigned int>		IndexBufferUInt;
 
+	class IndexBufferUShort :public IndexBuffer
+	{
+	public:
+		typedef unsigned short value_type;
+
+		//创建实例
+		//size为缓存大小
+		static SPtr(IndexBufferUShort) Create(int size = 0, Type type = STATIC_DRAW)
+		{
+			return SPtr(IndexBufferUShort)(new IndexBufferUShort(size, type));
+		}
+		//indices为要发送的顶点数据，size为缓存大小
+		static SPtr(IndexBufferUShort) Create(const std::vector<value_type>& indices, int size = 0, Type type = STATIC_DRAW)
+		{
+			return SPtr(IndexBufferUShort)(new IndexBufferUShort(indices, size, type));
+		}
+		//indices为要发送的顶点数据，length为indices的长度，size为缓存大小
+		static SPtr(IndexBufferUShort) Create(const value_type* indices, int length, int size = 0, Type type = STATIC_DRAW)
+		{
+			return SPtr(IndexBufferUShort)(new IndexBufferUShort(indices, length, size, type));
+		}
+
+		void Bind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_); }
+		void UnBind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
+
+		//更新缓存中的数据，返回false表示数据内容超出了缓存空间大小，更新失败
+		//使用前需调用Bind()
+		bool UpdateData(const std::vector<value_type>& indices, int offset = 0);
+
+	protected:
+		IndexBufferUShort(int size = 0, Type type = STATIC_DRAW);
+		IndexBufferUShort(const std::vector<value_type>& indices, int size = 0, Type type = STATIC_DRAW);
+		IndexBufferUShort(const value_type* indices, int length, int size = 0, Type type = STATIC_DRAW);
+	};
+
+
+	class IndexBufferUInt :public IndexBuffer
+	{
+	public:
+		typedef unsigned int value_type;
+
+		//创建实例
+		//size为缓存大小
+		static SPtr(IndexBufferUInt) Create(int size = 0, Type type = STATIC_DRAW)
+		{
+			return SPtr(IndexBufferUInt)(new IndexBufferUInt(size, type));
+		}
+		//indices为要发送的顶点数据，size为缓存大小
+		static SPtr(IndexBufferUInt) Create(const std::vector<value_type>& indices, int size = 0, Type type = STATIC_DRAW)
+		{
+			return SPtr(IndexBufferUInt)(new IndexBufferUInt(indices, size, type));
+		}
+		//indices为要发送的顶点数据，length为indices的长度，size为缓存大小
+		static SPtr(IndexBufferUInt) Create(const value_type* indices, int length, int size = 0, Type type = STATIC_DRAW)
+		{
+			return SPtr(IndexBufferUInt)(new IndexBufferUInt(indices, length, size, type));
+		}
+
+		void Bind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_); }
+		void UnBind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
+
+		//更新缓存中的数据，返回false表示数据内容超出了缓存空间大小，更新失败
+		//使用前需调用Bind()
+		bool UpdateData(const std::vector<value_type>& indices, int offset = 0);
+
+	protected:
+		IndexBufferUInt(int size = 0, Type type = STATIC_DRAW);
+		IndexBufferUInt(const std::vector<value_type>& indices, int size = 0, Type type = STATIC_DRAW);
+		IndexBufferUInt(const value_type* indices, int length, int size = 0, Type type = STATIC_DRAW);
+	};
+
+	typedef IndexBuffer			EBO;
 	typedef IndexBufferUByte	EBO_UByte;
 	typedef IndexBufferUShort	EBO_UShort;
 	typedef IndexBufferUInt		EBO_UInt;

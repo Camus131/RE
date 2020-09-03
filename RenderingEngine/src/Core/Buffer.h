@@ -1,14 +1,11 @@
 #pragma once
 
-#include "GLObject.h"
+#include "ContextObject.h"
 
 
 namespace OGE
 {
-	//1MB的字节长度
-	const int BUFFER_SIZE_1MB = 1048576;
-
-	class Buffer :public GLObject
+	class Buffer :public ContextObject
 	{
 	public:
 		//缓存数据类型
@@ -25,17 +22,18 @@ namespace OGE
 			DYNAMIC_COPY = GL_DYNAMIC_COPY,
 		};
 
+		~Buffer() { glDeleteBuffers(1, &id_); }
+
 		//返回缓存字节长度
 		int Size() const { return size_; }
 
-		//返回true表示缓存大小为0
-		bool IsEmpty() const { return size_ == 0; }
-
 	protected:
-		//防止外部创建对象
 		Buffer() :
-			GLObject(),
-			size_(0) {}
+			ContextObject(),
+			size_(0)
+		{
+			glGenBuffers(1, &id_);
+		}
 
 	protected:
 		//缓存字节长度

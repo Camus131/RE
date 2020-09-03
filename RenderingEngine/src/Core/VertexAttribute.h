@@ -2,40 +2,52 @@
 
 #include "../Math/Vec2f.h"
 #include "../Math/Vec3f.h"
-#include "../Math/Vec4f.h"
-#include "../Math/Matrixf.h"
 
 
 namespace OGE
 {
-	//顶点着色器顶点属性格式
-
-	//逐顶点
-	struct VertexAttrib_0
+	//顶点属性格式
+	struct Vertex
 	{
-		Vec3f	Position;
-		Vec3f	Normal;
+		Vec3	Position;
 	};
 
-	struct VertexAttrib_1
+	struct Vertex_1 :public Vertex
 	{
-		Vec3f	Position;
-		Vec3f	Normal;
-		Vec2f	TexCoord;
+		Vec3	Normal;
 	};
 
-	struct VertexAttrib_2
+	struct Vertex_2 :public Vertex
 	{
-		Vec3f	Position;
-		Vec3f	Normal;
-		Vec2f	TexCoord;
-		Vec3f	Tangent;
-		Vec3f	Bitangent;
+		Vec3	Normal;
+		Vec2	TexCoord;
 	};
 
-	//逐实例
-	struct VertexAttrib_10
+	struct Vertex_3 :public Vertex
 	{
-		Matrixf		Transform;
+		Vec3	Normal;
+		Vec2	TexCoord;
+		Vec3	Tangent;
+		Vec3	Bitangent;
+	};
+
+	//索引格式
+	struct Index
+	{
+	};
+
+	struct IndexUByte :public Index
+	{
+		unsigned char	Index;
+	};
+
+	struct IndexUShort :public Index
+	{
+		unsigned short	Index;
+	};
+
+	struct IndexUInt :public Index
+	{
+		unsigned int	Index;
 	};
 }
