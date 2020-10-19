@@ -2,8 +2,8 @@
 
 #include "ContextObject.h"
 
-#include "../Object/Program.h"
-#include "../Object/Uniform.h"
+#include "Object/Program.h"
+#include "Object/Uniform.h"
 
 
 namespace OGE
@@ -19,8 +19,8 @@ namespace OGE
 
 		~ShaderSource() { glDeleteProgram(id_); }
 
-		void Bind() const { glUseProgram(id_); }
-		void UnBind() const { glUseProgram(0); }
+		virtual void Bind() const { glUseProgram(id_); }
+		virtual void UnBind() const { glUseProgram(0); }
 
 		//获得Program
 		SPtr(Program) GetProgram() const { return program_; }
@@ -31,15 +31,12 @@ namespace OGE
 	protected:
 		ShaderSource(SPtr(Program) program);
 
+		//初始化
 		void CreateProgram(SPtr(Program) program);
-
 		void CreateShader(SPtr(Shader) shader, unsigned int& id);
 
 		//查询uniform变量的location
 		int QueryLocation(const std::string& name);
-
-		//查询uniform变量的当前值
-		SPtr(Uniform) QueryUniform(int location, SPtr(Uniform) uniform);
 
 	protected:
 		SPtr(Program)		program_;
@@ -49,7 +46,7 @@ namespace OGE
 		LocationMap			location_map_;
 
 		typedef std::unordered_map<int, SPtr(Uniform)>	UniformMap;
-		//启用uniform映射表
+		//启用中的uniform映射表
 		UniformMap			uniform_map_;
 	};
 }

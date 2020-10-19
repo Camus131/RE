@@ -1,16 +1,16 @@
 #include "Image.h"
 
-#include "../ThirdParty/stb_image.h"
+#include "ThirdParty/stb_image.h"
 
 
 namespace OGE
 {
 	Image::Image(const std::string& path, bool reverse_yaxis) :
-		ExternalObject()
+		Interviewee(),
+		path_(path),
+		reverse_yaxis_(reverse_yaxis)
 	{
-		name_ = "Image";
-		path_ = path;
-		reverse_yaxis_ = reverse_yaxis;
+		name_ = OGE_Image;
 		Load();
 	}
 

@@ -1,12 +1,13 @@
 #pragma once
 
-#include "ExternalObject.h"
-#include "../Math/Vec3f.h"
+#include "Core/Interviewee.h"
+
+#include "Math/Vec3f.h"
 
 
 namespace OGE
 {
-	class Light :public ExternalObject
+	class Light :public Interviewee
 	{
 	public:
 		//获得/设置环境光
@@ -22,7 +23,11 @@ namespace OGE
 		void SetSpecular(const Vec3& specular) { specular_ = specular; }
 
 	protected:
-		Light();
+		Light() :
+			Interviewee(),
+			ambient_(Vec3(0.2f, 0.2f, 0.2f)),
+			diffuse_(Vec3(0.8f, 0.8f, 0.8f)),
+			specular_(Vec3(0.8f, 0.8f, 0.8f)) {}
 
 	protected:
 		//环境光
@@ -52,7 +57,12 @@ namespace OGE
 		void SetPosition(const Vec3& position) { position_ = position; }
 
 	protected:
-		PointLight();
+		PointLight() :
+			Light(),
+			position_(Vec3(0.0f, 0.0f, 0.0f))
+		{
+			name_ = OGE_PointLight;
+		}
 
 	protected:
 		Vec3		position_;
@@ -75,7 +85,12 @@ namespace OGE
 		void SetDir(const Vec3& direction) { direction_ = direction; }
 
 	protected:
-		DirLight();
+		DirLight() :
+			Light(),
+			direction_(Vec3(0.0f, 0.0f, -1.0f))
+		{
+			name_ = OGE_DirLight;
+		}
 
 	protected:
 		Vec3		direction_;

@@ -8,18 +8,35 @@
 #include "Texture2DSource.h"
 #include "UniformList.h"
 
-#include "../Object/Mesh.h"
+#include "Object/Leaf.h"
 
 
 namespace OGE
 {
-	class RenderingUnit :public Object
+	class RenderingUnit :public BaseObject
 	{
 	public:
 		//创建实例
 		static SPtr(RenderingUnit) Create()
 		{
 			return SPtr(RenderingUnit)(new RenderingUnit);
+		}
+
+		SPtr(RenderingUnit) Copy() const
+		{
+			SPtr(RenderingUnit) unit = RenderingUnit::Create();
+			unit->shader_ = shader_;
+			unit->emission_map_ = emission_map_;
+			unit->diffuse_map_ = diffuse_map_;
+			unit->specular_map_ = specular_map_;
+			unit->vbo_ = vbo_;
+			unit->ebo_ = ebo_;
+			unit->vao_ = vao_;
+			unit->model_matrixs_ = model_matrixs_;
+			unit->materials_ = materials_;
+			unit->drawing_call_ = drawing_call_;
+			unit->leaf_ = leaf_;
+			return unit;
 		}
 
 		//获得/设置shader
@@ -50,23 +67,27 @@ namespace OGE
 		SPtr(VAO) GetVAO() const { return vao_; }
 		void SetVAO(SPtr(VAO) vao) { vao_ = vao; }
 
-		//获得/设置uniform列表
-		SPtr(UniformList) GetUniformList() const { return uniform_list_; }
-		void SetUniformList(SPtr(UniformList) uniform_list) { uniform_list_ = uniform_list; }
+		//获得/设置model matrixs
+		SPtr(UniformList) GetModelMatrixs() const { return model_matrixs_; }
+		void SetModelMatrixs(SPtr(UniformList) model_matrixs) { model_matrixs_ = model_matrixs; }
+
+		//获得/设置materials
+		SPtr(UniformList) GetMaterials() const { return materials_; }
+		void SetMaterials(SPtr(UniformList) materials) { materials_ = materials; }
 
 		//获得/设置drawcall
 		SPtr(DrawingCall) GetDrawingCall() const { return drawing_call_; }
 		void SetDrawingCall(SPtr(DrawingCall) drawing_call) { drawing_call_ = drawing_call; }
 
-		//获得/设置mesh
-		SPtr(Mesh) GetMesh() const { return mesh_; }
-		void SetMesh(SPtr(Mesh) mesh) { mesh_ = mesh; }
+		//获得/设置源对象
+		SPtr(Leaf) GetLeaf() const { return leaf_; }
+		void SetLeaf(SPtr(Leaf) leaf) { leaf_ = leaf; }
 
 	protected:
 		RenderingUnit() :
-			Object()
+			BaseObject()
 		{
-			name_ = "RenderingUnit";
+			name_ = OGE_RenderingUnit;
 		}
 
 	protected:
@@ -84,10 +105,12 @@ namespace OGE
 
 		SPtr(VAO)					vao_;
 
-		SPtr(UniformList)			uniform_list_;
+		SPtr(UniformList)			model_matrixs_;
+
+		SPtr(UniformList)			materials_;
 
 		SPtr(DrawingCall)			drawing_call_;
 
-		SPtr(Mesh)					mesh_;
+		SPtr(Leaf)					leaf_;
 	};
 }

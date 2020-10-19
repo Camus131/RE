@@ -9,11 +9,14 @@ namespace OGE
 	{
 	public:
 		//重新分配缓存，开销较大，size为缓存大小
-		void ResetMemory(int size, Type type = STATIC_DRAW);
+		void ResetMemory(int size = 0, Type type = STATIC_DRAW);
+
+		virtual void Bind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_); }
+		virtual void UnBind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
 
 	protected:
-		IndexBuffer() :
-			Buffer() {}
+		IndexBuffer(int size = 0, Type type = STATIC_DRAW) :
+			Buffer(size, type) {}
 	};
 
 
@@ -33,23 +36,13 @@ namespace OGE
 		{
 			return SPtr(IndexBufferUByte)(new IndexBufferUByte(indices, size, type));
 		}
-		//indices为要发送的顶点数据，length为indices的长度，size为缓存大小
-		static SPtr(IndexBufferUByte) Create(const value_type* indices, int length, int size = 0, Type type = STATIC_DRAW)
-		{
-			return SPtr(IndexBufferUByte)(new IndexBufferUByte(indices, length, size, type));
-		}
-
-		void Bind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_); }
-		void UnBind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
 
 		//更新缓存中的数据，返回false表示数据内容超出了缓存空间大小，更新失败
-		//使用前需调用Bind()
 		bool UpdateData(const std::vector<value_type>& indices, int offset = 0);
 
 	protected:
 		IndexBufferUByte(int size = 0, Type type = STATIC_DRAW);
 		IndexBufferUByte(const std::vector<value_type>& indices, int size = 0, Type type = STATIC_DRAW);
-		IndexBufferUByte(const value_type* indices, int length, int size = 0, Type type = STATIC_DRAW);
 	};
 
 
@@ -69,23 +62,13 @@ namespace OGE
 		{
 			return SPtr(IndexBufferUShort)(new IndexBufferUShort(indices, size, type));
 		}
-		//indices为要发送的顶点数据，length为indices的长度，size为缓存大小
-		static SPtr(IndexBufferUShort) Create(const value_type* indices, int length, int size = 0, Type type = STATIC_DRAW)
-		{
-			return SPtr(IndexBufferUShort)(new IndexBufferUShort(indices, length, size, type));
-		}
-
-		void Bind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_); }
-		void UnBind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
 
 		//更新缓存中的数据，返回false表示数据内容超出了缓存空间大小，更新失败
-		//使用前需调用Bind()
 		bool UpdateData(const std::vector<value_type>& indices, int offset = 0);
 
 	protected:
 		IndexBufferUShort(int size = 0, Type type = STATIC_DRAW);
 		IndexBufferUShort(const std::vector<value_type>& indices, int size = 0, Type type = STATIC_DRAW);
-		IndexBufferUShort(const value_type* indices, int length, int size = 0, Type type = STATIC_DRAW);
 	};
 
 
@@ -105,23 +88,13 @@ namespace OGE
 		{
 			return SPtr(IndexBufferUInt)(new IndexBufferUInt(indices, size, type));
 		}
-		//indices为要发送的顶点数据，length为indices的长度，size为缓存大小
-		static SPtr(IndexBufferUInt) Create(const value_type* indices, int length, int size = 0, Type type = STATIC_DRAW)
-		{
-			return SPtr(IndexBufferUInt)(new IndexBufferUInt(indices, length, size, type));
-		}
-
-		void Bind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id_); }
-		void UnBind() const { glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); }
 
 		//更新缓存中的数据，返回false表示数据内容超出了缓存空间大小，更新失败
-		//使用前需调用Bind()
 		bool UpdateData(const std::vector<value_type>& indices, int offset = 0);
 
 	protected:
 		IndexBufferUInt(int size = 0, Type type = STATIC_DRAW);
 		IndexBufferUInt(const std::vector<value_type>& indices, int size = 0, Type type = STATIC_DRAW);
-		IndexBufferUInt(const value_type* indices, int length, int size = 0, Type type = STATIC_DRAW);
 	};
 
 	typedef IndexBuffer			EBO;

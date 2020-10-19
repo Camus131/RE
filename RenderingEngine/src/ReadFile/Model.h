@@ -14,7 +14,7 @@
 //	public:
 //		Model(const std::string& model_path);
 //
-//	private:
+//	protected:
 //		void loadModel(const std::string& model_path);
 //		void processNode(aiNode* node, const aiScene* scene);
 //		Mesh processMesh(aiMesh* mesh, const aiScene* scene);

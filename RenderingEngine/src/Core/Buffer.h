@@ -24,19 +24,25 @@ namespace OGE
 
 		~Buffer() { glDeleteBuffers(1, &id_); }
 
-		//返回缓存字节长度
-		int Size() const { return size_; }
+		//获得缓存字节长度
+		int GetSize() const { return size_; }
+
+		//获得缓存数据类型
+		Type GetType() const { return type_; }
 
 	protected:
-		Buffer() :
+		Buffer(int size = 0, Type type = STATIC_DRAW) :
 			ContextObject(),
-			size_(0)
+			size_(size),
+			type_(type)
 		{
 			glGenBuffers(1, &id_);
 		}
 
 	protected:
 		//缓存字节长度
-		int		size_;
+		int			size_;
+		//缓存数据类型
+		Type		type_;
 	};
 }

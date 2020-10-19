@@ -3,26 +3,11 @@
 
 namespace OGE
 {
-	PhongState::PhongState() :
-		State()
-	{
-		name_ = "PhongState";
-	}
-
-
 	SPtr(PhongState) PhongState::Copy() const
 	{
 		SPtr(PhongState) state = SPtr(PhongState)(new PhongState);
 		state->material_ = material_;
-		state->light_ = light_;
 		return state;
-	}
-
-
-	CustomState::CustomState() :
-		State()
-	{
-		name_ = "CustomState";
 	}
 
 

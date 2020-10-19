@@ -3,21 +3,6 @@
 
 namespace OGE
 {
-	DrawArrays::DrawArrays(Mode mode, int instanced_num) :
-		DrawingSet(mode, instanced_num)
-	{
-		name_ = "DrawArrays";
-	}
-
-
-	DrawArrays::DrawArrays(Mode mode, int first, int count, bool enable, int instanced_num ) :
-		DrawingSet(mode, instanced_num)
-	{
-		name_ = "DrawArrays";
-		segments_map_[DrawSegment(first, count)] = enable;
-	}
-
-
 	SPtr(DrawArrays) DrawArrays::Copy() const
 	{
 		SPtr(DrawArrays) drawcall = SPtr(DrawArrays)(new DrawArrays(mode_, instanced_num_));

@@ -2,7 +2,7 @@
 
 #include "ContextObject.h"
 
-#include "../Object/Texture2D.h"
+#include "Object/Texture2D.h"
 
 
 namespace OGE
@@ -18,13 +18,13 @@ namespace OGE
 
 		~Texture2DSource() { glDeleteTextures(1, &id_); }
 
-		void Bind() const 
+		virtual void Bind() const 
 		{ 
 			glActiveTexture(Texture::Unit::TEXTURE0);
 			glBindTexture(GL_TEXTURE_2D, id_); 
 		}
 
-		void Bind(int unit) const
+		virtual void Bind(int unit) const
 		{
 			glActiveTexture(Texture::Unit::TEXTURE0 + unit);
 			glBindTexture(GL_TEXTURE_2D, id_);
@@ -38,6 +38,7 @@ namespace OGE
 	protected:
 		Texture2DSource(SPtr(Texture2D) texture);
 
+		//≥ı ºªØ
 		void CreateTexture2D(SPtr(Texture2D) texture);
 
 	protected:

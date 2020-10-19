@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../Object/Uniform.h"
+#include "Object/Uniform.h"
 
 
 namespace OGE
 {
-	class UniformList :public Object
+	class UniformList :public BaseObject
 	{
 	public:
 		//´´½¨ÊµÀý
@@ -28,7 +28,11 @@ namespace OGE
 		void Clear() { uniform_list_.clear(); }
 
 	protected:
-		UniformList();
+		UniformList() :
+			BaseObject()
+		{
+			name_ = OGE_UniformList;
+		}
 
 	protected:
 		std::vector<SPtr(Uniform)>		uniform_list_;

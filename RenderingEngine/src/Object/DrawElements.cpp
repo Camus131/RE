@@ -90,21 +90,6 @@ namespace OGE
 	}
 
 
-	DrawElementsUByte::DrawElementsUByte(Mode mode, int instanced_num) :
-		DrawElements(mode, instanced_num)
-	{
-		name_ = "DrawElementsUByte";
-	}
-
-
-	DrawElementsUByte::DrawElementsUByte(Mode mode, int offset, int count, int basevertex, bool enable, int instanced_num) :
-		DrawElements(mode, instanced_num)
-	{
-		name_ = "DrawElementsUByte";
-		segments_map_[DrawSegment(offset, count, basevertex)] = enable;
-	}
-
-
 	SPtr(DrawElementsUByte) DrawElementsUByte::Copy() const
 	{
 		SPtr(DrawElementsUByte) drawcall = SPtr(DrawElementsUByte)(new DrawElementsUByte(mode_, instanced_num_));
@@ -113,41 +98,11 @@ namespace OGE
 	}
 
 
-	DrawElementsUShort::DrawElementsUShort(Mode mode, int instanced_num) :
-		DrawElements(mode, instanced_num)
-	{
-		name_ = "DrawElementsUShort";
-	}
-
-
-	DrawElementsUShort::DrawElementsUShort(Mode mode, int offset, int count, int basevertex, bool enable, int instanced_num) :
-		DrawElements(mode, instanced_num)
-	{
-		name_ = "DrawElementsUShort";
-		segments_map_[DrawSegment(offset, count, basevertex)] = enable;
-	}
-
-
 	SPtr(DrawElementsUShort) DrawElementsUShort::Copy() const
 	{
 		SPtr(DrawElementsUShort) drawcall = SPtr(DrawElementsUShort)(new DrawElementsUShort(mode_, instanced_num_));
 		drawcall->segments_map_ = segments_map_;
 		return drawcall;
-	}
-
-
-	DrawElementsUInt::DrawElementsUInt(Mode mode, int instanced_num) :
-		DrawElements(mode, instanced_num)
-	{
-		name_ = "DrawElementsUInt";
-	}
-
-
-	DrawElementsUInt::DrawElementsUInt(Mode mode, int offset, int count, int basevertex, bool enable, int instanced_num) :
-		DrawElements(mode, instanced_num)
-	{
-		name_ = "DrawElementsUInt";
-		segments_map_[DrawSegment(offset, count, basevertex)] = enable;
 	}
 
 

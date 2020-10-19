@@ -1,12 +1,13 @@
 #pragma once
 
 #include "Texture2D.h"
-#include "../Math/Vec3f.h"
+
+#include "Math/Vec3f.h"
 
 
 namespace OGE
 {
-	class Material :public ExternalObject
+	class Material :public Interviewee
 	{
 	public:
 		//创建实例
@@ -38,7 +39,15 @@ namespace OGE
 		void SetEmissionMap(SPtr(Texture2D) map) { emission_map_ = map; }
 
 	protected:
-		Material();
+		Material() :
+			Interviewee(),
+			diffuse_color_(Vec3(0.8f, 0.8f, 0.8f)),
+			specular_color_(Vec3(0.0f, 0.0f, 0.0f)),
+			shininess_(0.0f),
+			emission_color_(Vec3(0.0f, 0.0f, 0.0f))
+		{
+			name_ = OGE_Material;
+		}
 
 	protected:
 		//漫反射材质

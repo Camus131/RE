@@ -1,19 +1,19 @@
 #pragma once
 
-#include "Object.h"
+#include "BaseObject.h"
 
 
 namespace OGE
 {
-	class ContextObject :public Object
+	class ContextObject :public BaseObject
 	{
 	public:
 		//禁用拷贝构造和赋值
 		ContextObject(const ContextObject&) = delete;
 		ContextObject& operator = (const ContextObject&) = delete;
 
-		//返回对象id
-		unsigned int Id()const { return id_; }
+		//获得对象id
+		unsigned int GetId()const { return id_; }
 
 		//绑定对象至上下文
 		virtual void Bind() const = 0;
@@ -23,10 +23,11 @@ namespace OGE
 
 	protected:
 		ContextObject() :
-			Object(),
+			BaseObject(),
 			id_(0) {}
 
 	protected:
+		//对象id
 		unsigned int	id_;
 	};
 }

@@ -1,11 +1,11 @@
 #pragma once
 
-#include "ExternalObject.h"
+#include "Core/Interviewee.h"
 
 
 namespace OGE
 {
-	class Shader :public ExternalObject
+	class Shader :public Interviewee
 	{
 	public:
 		//着色器类型

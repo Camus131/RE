@@ -64,8 +64,17 @@ namespace OGE
 		void RemoveAllSegments() { segments_map_.clear(); }
 
 	protected:
-		DrawArrays(Mode mode, int instanced_num = 1);
-		DrawArrays(Mode mode, int first, int count, bool enable = true, int instanced_num = 1);
+		DrawArrays(Mode mode, int instanced_num = 1) :
+			DrawingSet(mode, instanced_num)
+		{
+			name_ = OGE_DrawArrays;
+		}
+		DrawArrays(Mode mode, int first, int count, bool enable = true, int instanced_num = 1) :
+			DrawingSet(mode, instanced_num)
+		{
+			name_ = OGE_DrawArrays;
+			segments_map_[DrawSegment(first, count)] = enable;
+		}
 
 	protected:
 		//所有绘制段及其启用状态的映射表

@@ -77,6 +77,10 @@ namespace OGE
 		{
 			return SPtr(DrawElementsUByte)(new DrawElementsUByte(mode, offset, count, basevertex, enable, instanced_num));
 		}
+		static SPtr(DrawElementsUByte) Create(Mode mode, const std::vector<value_type>& indices, int instanced_num = 1)
+		{
+			return SPtr(DrawElementsUByte)(new DrawElementsUByte(mode, indices, instanced_num));
+		}
 
 		SPtr(DrawElementsUByte) Copy() const;
 
@@ -86,8 +90,24 @@ namespace OGE
 		void SetIndices(const std::vector<value_type>& indices) { indices_ = indices; }
 
 	protected:
-		DrawElementsUByte(Mode mode, int instanced_num = 1);
-		DrawElementsUByte(Mode mode, int offset, int count, int basevertex = 0, bool enable = true, int instanced_num = 1);
+		DrawElementsUByte(Mode mode, int instanced_num = 1) :
+			DrawElements(mode, instanced_num)
+		{
+			name_ = OGE_DrawElementsUByte;
+		}
+		DrawElementsUByte(Mode mode, int offset, int count, int basevertex = 0, bool enable = true, int instanced_num = 1) :
+			DrawElements(mode, instanced_num)
+		{
+			name_ = OGE_DrawElementsUByte;
+			segments_map_[DrawSegment(offset, count, basevertex)] = enable;
+		}
+		DrawElementsUByte(Mode mode, const std::vector<value_type>& indices, int instanced_num = 1) :
+			DrawElements(mode, instanced_num),
+			indices_(indices)
+		{
+			name_ = OGE_DrawElementsUByte;
+			segments_map_[DrawSegment(0, indices.size(), 0)] = true;
+		}
 
 	protected:
 		std::vector<value_type>		indices_;
@@ -108,6 +128,10 @@ namespace OGE
 		{
 			return SPtr(DrawElementsUShort)(new DrawElementsUShort(mode, offset, count, basevertex, enable, instanced_num));
 		}
+		static SPtr(DrawElementsUShort) Create(Mode mode, const std::vector<value_type>& indices, int instanced_num = 1)
+		{
+			return SPtr(DrawElementsUShort)(new DrawElementsUShort(mode, indices, instanced_num));
+		}
 
 		SPtr(DrawElementsUShort) Copy() const;
 
@@ -117,8 +141,25 @@ namespace OGE
 		void SetIndices(const std::vector<value_type>& indices) { indices_ = indices; }
 
 	protected:
-		DrawElementsUShort(Mode mode, int instanced_num = 1);
-		DrawElementsUShort(Mode mode, int offset, int count, int basevertex = 0, bool enable = true, int instanced_num = 1);
+		DrawElementsUShort(Mode mode, int instanced_num = 1) :
+			DrawElements(mode, instanced_num)
+		{
+			name_ = OGE_DrawElementsUShort;
+		}
+		DrawElementsUShort(Mode mode, int offset, int count, int basevertex = 0, bool enable = true, int instanced_num = 1) :
+			DrawElements(mode, instanced_num)
+		{
+			name_ = OGE_DrawElementsUShort;
+			segments_map_[DrawSegment(offset, count, basevertex)] = enable;
+		}
+		DrawElementsUShort(Mode mode, const std::vector<value_type>& indices, int instanced_num = 1) :
+			DrawElements(mode, instanced_num),
+			indices_(indices)
+		{
+			name_ = OGE_DrawElementsUShort;
+			segments_map_[DrawSegment(0, indices.size(), 0)] = true;
+			indices_ = indices;
+		}
 
 	protected:
 		std::vector<value_type>		indices_;
@@ -139,6 +180,10 @@ namespace OGE
 		{
 			return SPtr(DrawElementsUInt)(new DrawElementsUInt(mode, offset, count, basevertex, enable, instanced_num));
 		}
+		static SPtr(DrawElementsUInt) Create(Mode mode, const std::vector<value_type>& indices, int instanced_num = 1)
+		{
+			return SPtr(DrawElementsUInt)(new DrawElementsUInt(mode, indices, instanced_num));
+		}
 
 		SPtr(DrawElementsUInt) Copy() const;
 
@@ -148,8 +193,25 @@ namespace OGE
 		void SetIndices(const std::vector<value_type>& indices) { indices_ = indices; }
 
 	protected:
-		DrawElementsUInt(Mode mode, int instanced_num = 1);
-		DrawElementsUInt(Mode mode, int offset, int count, int basevertex = 0, bool enable = true, int instanced_num = 1);
+		DrawElementsUInt(Mode mode, int instanced_num = 1) :
+			DrawElements(mode, instanced_num)
+		{
+			name_ = OGE_DrawElementsUInt;
+		}
+		DrawElementsUInt(Mode mode, int offset, int count, int basevertex = 0, bool enable = true, int instanced_num = 1) :
+			DrawElements(mode, instanced_num)
+		{
+			name_ = OGE_DrawElementsUInt;
+			segments_map_[DrawSegment(offset, count, basevertex)] = enable;
+		}
+		DrawElementsUInt(Mode mode, const std::vector<value_type>& indices, int instanced_num = 1) :
+			DrawElements(mode, instanced_num),
+			indices_(indices)
+		{
+			name_ = OGE_DrawElementsUInt;
+			segments_map_[DrawSegment(0, indices.size(), 0)] = true;
+			indices_ = indices;
+		}
 
 	protected:
 		std::vector<value_type>		indices_;

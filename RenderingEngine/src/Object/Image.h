@@ -1,11 +1,11 @@
 #pragma once
 
-#include "ExternalObject.h"
+#include "Core/Interviewee.h"
 
 
 namespace OGE
 {
-	class Image :public ExternalObject
+	class Image :public Interviewee
 	{
 	public:
 		//创建实例
@@ -39,19 +39,14 @@ namespace OGE
 	protected:
 		//数据
 		unsigned char*	data_;
-
 		//路径
 		std::string		path_;
-
 		//宽
 		int				width_;
-
 		//高
 		int				height_;
-
 		//颜色通道个数
 		int				nr_channels_;
-
 		//y轴反转
 		bool			reverse_yaxis_;
 	};

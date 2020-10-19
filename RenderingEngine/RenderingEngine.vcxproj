@@ -87,7 +87,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../Dependencies/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../Dependencies/include;src</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>26812;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -106,7 +106,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../Dependencies/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../Dependencies/include;src</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>26812;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -127,7 +127,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../Dependencies/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../Dependencies/include;src</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>26812;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -150,7 +150,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../Dependencies/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../Dependencies/include;src</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>26812;4267;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -167,11 +167,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\DrawingCall.cpp" />
-    <ClCompile Include="src\Core\MeshVisitor.cpp" />
+    <ClCompile Include="src\Core\Frustum.cpp" />
+    <ClCompile Include="src\Core\NodeVisitor.cpp" />
+    <ClCompile Include="src\Core\PerspectiveCamera.cpp" />
     <ClCompile Include="src\Core\Renderer.cpp" />
     <ClCompile Include="src\Core\UniformList.cpp" />
+    <ClCompile Include="src\Object\Cube.cpp" />
     <ClCompile Include="src\Object\DrawArrays.cpp" />
     <ClCompile Include="src\Object\DrawElements.cpp" />
+    <ClCompile Include="src\Object\Group.cpp" />
     <ClCompile Include="src\Object\Image.cpp" />
     <ClCompile Include="src\Core\IndexBuffer.cpp" />
     <ClCompile Include="src\Object\Light.cpp" />
@@ -182,11 +186,10 @@
     <ClCompile Include="src\Core\ShaderSource.cpp" />
     <ClCompile Include="src\Core\Texture2DSource.cpp" />
     <ClCompile Include="src\Object\State.cpp" />
-    <ClCompile Include="src\Object\Uniform.cpp" />
     <ClCompile Include="src\Core\VertexBuffer.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Object\Texture2D.cpp" />
-    <ClCompile Include="src\Scene\FPSCamera.cpp" />
+    <ClCompile Include="src\Object\Transform.cpp" />
     <ClCompile Include="src\ReadFile\Model.cpp" />
     <ClCompile Include="src\ThirdParty\stb_image.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
@@ -197,45 +200,55 @@
   <ItemGroup>
     <ClInclude Include="src\Core\Buffer.h" />
     <ClInclude Include="src\Core\DrawingCall.h" />
-    <ClInclude Include="src\Core\MeshVisitor.h" />
+    <ClInclude Include="src\Core\NodeVisitor.h" />
+    <ClInclude Include="src\Core\PerspectiveCamera.h" />
     <ClInclude Include="src\Core\Renderer.h" />
     <ClInclude Include="src\Core\RenderingUnit.h" />
     <ClInclude Include="src\Core\UniformList.h" />
+    <ClInclude Include="src\Object\Viewport.h" />
+    <ClInclude Include="src\Math\BoundingBoxf.h" />
+    <ClInclude Include="src\Math\BoundingBoxd.h" />
+    <ClInclude Include="src\Math\EulerAnglesd.h" />
+    <ClInclude Include="src\Core\Frustum.h" />
+    <ClInclude Include="src\Math\Planed.h" />
+    <ClInclude Include="src\Math\Planef.h" />
+    <ClInclude Include="src\Object\Cube.h" />
     <ClInclude Include="src\Object\DrawArrays.h" />
     <ClInclude Include="src\Object\DrawElements.h" />
-    <ClInclude Include="src\Core\Object.h" />
+    <ClInclude Include="src\Core\BaseObject.h" />
     <ClInclude Include="src\Object\DrawingSet.h" />
+    <ClInclude Include="src\Object\Group.h" />
     <ClInclude Include="src\Object\Image.h" />
     <ClInclude Include="src\Core\IndexBuffer.h" />
     <ClInclude Include="src\Core\ContextObject.h" />
+    <ClInclude Include="src\Object\Leaf.h" />
     <ClInclude Include="src\Object\Light.h" />
     <ClInclude Include="src\Object\Material.h" />
     <ClInclude Include="src\Object\Mesh.h" />
+    <ClInclude Include="src\Object\Node.h" />
     <ClInclude Include="src\Object\Program.h" />
     <ClInclude Include="src\Object\Shader.h" />
     <ClInclude Include="src\Core\ShaderSource.h" />
     <ClInclude Include="src\Object\State.h" />
     <ClInclude Include="src\Object\Texture.h" />
     <ClInclude Include="src\Core\Texture2DSource.h" />
+    <ClInclude Include="src\Object\Transform.h" />
     <ClInclude Include="src\Object\Uniform.h" />
     <ClInclude Include="src\Core\VertexArray.h" />
-    <ClInclude Include="src\Core\VertexAttribute.h" />
     <ClInclude Include="src\Core\VertexBuffer.h" />
     <ClInclude Include="src\Core\Visitor.h" />
-    <ClInclude Include="src\Math\EulerAngles.h" />
+    <ClInclude Include="src\Math\EulerAnglesf.h" />
     <ClInclude Include="src\Math\Math.h" />
     <ClInclude Include="src\Math\Matrixd.h" />
     <ClInclude Include="src\Math\Matrixf.h" />
-    <ClInclude Include="src\Math\Quat.h" />
     <ClInclude Include="src\Math\Vec2d.h" />
     <ClInclude Include="src\Math\Vec2f.h" />
     <ClInclude Include="src\Math\Vec3d.h" />
     <ClInclude Include="src\Math\Vec3f.h" />
     <ClInclude Include="src\Math\Vec4d.h" />
     <ClInclude Include="src\Math\Vec4f.h" />
-    <ClInclude Include="src\Object\ExternalObject.h" />
+    <ClInclude Include="src\Core\Interviewee.h" />
     <ClInclude Include="src\Object\Texture2D.h" />
-    <ClInclude Include="src\Scene\FPSCamera.h" />
     <ClInclude Include="src\ReadFile\Model.h" />
     <ClInclude Include="src\ThirdParty\stb_image.h" />
     <ClInclude Include="src\Window\Window.h" />

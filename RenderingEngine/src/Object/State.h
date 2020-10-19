@@ -2,17 +2,16 @@
 
 #include "Program.h"
 #include "Material.h"
-#include "Light.h"
 #include "Uniform.h"
 
 
 namespace OGE
 {
-	class State :public ExternalObject
+	class State :public Interviewee
 	{
 	protected:
 		State() :
-			ExternalObject() {}
+			Interviewee() {}
 	};
 
 
@@ -31,17 +30,21 @@ namespace OGE
 		SPtr(Material) GetMaterial() { return material_; }
 		void SetMaterial(SPtr(Material) material) { material_ = material; }
 
-		//获得/设置光源
-		SPtr(Light) GetLight() { return light_; }
-		void SetLight(SPtr(Light) light) { light_ = light; }
+		//获得/设置alpha
+		float GetAlpha() { return alpha_; }
+		void SetAlpha(float alpha) { alpha_ = alpha; }
 
 	protected:
-		PhongState();
+		PhongState() :
+			State()
+		{
+			name_ = OGE_PhongState;
+		}
 
 	protected:
 		SPtr(Material)		material_;
 
-		SPtr(Light)			light_;
+		float				alpha_;
 	};
 
 
@@ -67,7 +70,11 @@ namespace OGE
 		SPtr(Uniform) GetUniform(const std::string& name) const;
 
 	protected:
-		CustomState();
+		CustomState() :
+			State()
+		{
+			name_ = OGE_CustomState;
+		}
 
 	protected:
 		SPtr(Program)		program_;

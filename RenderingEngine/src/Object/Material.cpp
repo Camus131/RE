@@ -3,17 +3,6 @@
 
 namespace OGE
 {
-	Material::Material() :
-		ExternalObject()
-	{
-		name_ = "Material";
-		diffuse_color_ = Vec3(0.8f, 0.8f, 0.8f);
-		specular_color_ = Vec3(0.0f, 0.0f, 0.0f);
-		shininess_ = 0.0f;
-		emission_color_ = Vec3(0.0f, 0.0f, 0.0f);
-	}
-
-
 	SPtr(Material) Material::Copy() const
 	{
 		SPtr(Material) material = SPtr(Material)(new Material);

@@ -3,13 +3,6 @@
 
 namespace OGE
 {
-	Program::Program() :
-		ExternalObject()
-	{
-		name_ = "Program";
-	}
-
-
 	SPtr(Program) Program::Copy() const
 	{
 		SPtr(Program) program = SPtr(Program)(new Program);

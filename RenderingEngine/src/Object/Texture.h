@@ -5,7 +5,7 @@
 
 namespace OGE
 {
-	class Texture :public ExternalObject
+	class Texture :public Interviewee
 	{
     public:
         //环绕轴方向
@@ -175,7 +175,7 @@ namespace OGE
 
     protected:
         Texture() :
-            ExternalObject()
+            Interviewee()
         {
             parameter_list_.s_wrap_ = WrapMode::REPEAT;
             parameter_list_.t_wrap_ = WrapMode::REPEAT;
@@ -196,37 +196,26 @@ namespace OGE
         {
             //s轴环绕模式
             WrapMode                    s_wrap_;
-
             //t轴环绕模式
             WrapMode                    t_wrap_;
-
             //r轴环绕模式
             WrapMode                    r_wrap_;
-
             //缩小时的过滤模式
             FilterMode                  min_filter_;
-
             //放大时的过滤模式
             FilterMode                  mag_filter_;
-
             //是否启用多级渐远纹理
             bool                        mipmap_enable_;
-
             //多级渐远纹理等级
             int                         mipmap_level_;
-
             //GPU数据格式
             Format                      internal_format_;
-
             //CPU数据格式
             Format			            format_;
-
             //CPU数据类型
             Type                        type_;
-
             //宽
             int				            width_;
-
             //高
             int				            height_;
         }; 

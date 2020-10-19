@@ -17,7 +17,7 @@ namespace OGE
 		SPtr(Texture2D) Copy() const;
 
 		//ªÒµ√/…Ë÷√ÕºœÒ
-		SPtr(Image) GetImage() const;
+		SPtr(Image) GetImage() const { return image_list_[0]; }
 		void SetImage(SPtr(Image) image);
 
 	protected:

@@ -3,10 +3,10 @@
 
 namespace OGE
 {
-	Texture2D::Texture2D(SPtr(Image) image)
+	Texture2D::Texture2D(SPtr(Image) image) :
+		Texture()
 	{
-		name_ = "Texture2D";
-		image_list_.reserve(1);
+		name_ = OGE_Texture2D;
 		image_list_.emplace_back(nullptr);
 		SetImage(image);
 	}
@@ -29,14 +29,6 @@ namespace OGE
 		tex2d->parameter_list_.height_ = parameter_list_.height_;
 		tex2d->image_list_ = image_list_;
 		return tex2d;
-	}
-
-
-	SPtr(Image) Texture2D::GetImage() const
-	{
-		if (image_list_.size() > 0)
-			return image_list_[0];
-		return nullptr;
 	}
 
 

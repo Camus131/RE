@@ -1,20 +1,20 @@
 #pragma once
 
-#include "Object.h"
+#include "BaseObject.h"
 
 
 namespace OGE
 {
-	class ExternalObject;
+	class Interviewee;
 
-	class Visitor :public Object
+	class Visitor :public BaseObject
 	{
 	public:
-		//访问外部对象
-		virtual void Visit(SPtr(ExternalObject) object) {}
+		//访问对象
+		virtual void Visit(SPtr(Interviewee) object) {}
 
 	protected:
 		Visitor() :
-			Object() {}
+			BaseObject() {}
 	};
 }

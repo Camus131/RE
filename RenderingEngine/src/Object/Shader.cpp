@@ -1,6 +1,5 @@
 #include "Shader.h"
 
-#include <iostream>
 #include <fstream>
 #include <sstream>
 
@@ -8,10 +7,10 @@
 namespace OGE
 {
 	Shader::Shader(Type type, const std::string& code, StrType str_type) :
-		ExternalObject()
+		Interviewee(),
+		type_(type)
 	{
-		name_ = "Shader";
-		type_ = type;
+		name_ = OGE_Shader;
 		SetCode(code, str_type);
 	}
 

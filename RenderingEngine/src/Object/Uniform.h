@@ -1,14 +1,15 @@
 #pragma once
 
-#include "ExternalObject.h"
-#include "../Math/Vec2f.h"
-#include "../Math/Vec4f.h"
-#include "../Math/Matrixf.h"
+#include "Core/Interviewee.h"
+
+#include "Math/Vec2f.h"
+#include "Math/Vec4f.h"
+#include "Math/Matrixf.h"
 
 
 namespace OGE
 {
-	class Uniform :public ExternalObject
+	class Uniform :public Interviewee
 	{
 	public:
 		//获得/设置uniform名字
@@ -16,38 +17,12 @@ namespace OGE
 		void SetUniformName(const std::string& uniform_name) { uniform_name_ = uniform_name; }
 
 	protected:
-		Uniform() :
-			ExternalObject() {}
+		Uniform(const std::string& uniform_name) :
+			Interviewee(),
+			uniform_name_(uniform_name) {}
 
 	protected:
 		std::string		uniform_name_;
-	};
-
-
-	class UniformFloat :public Uniform
-	{
-	public:
-		typedef float value_type;
-
-		//创建实例
-		static SPtr(UniformFloat) Create(const std::string& uniform_name, value_type value)
-		{
-			return SPtr(UniformFloat)(new UniformFloat(uniform_name, value));
-		}
-
-		SPtr(UniformFloat) Copy() const { return SPtr(UniformFloat)(new UniformFloat(uniform_name_, value_)); }
-
-		//获得/设置uniform值
-		value_type GetValue() const { return value_; }
-		void SetValue(value_type value) { value_ = value; }
-
-		bool operator == (const UniformFloat& uniform) const { return uniform_name_ == uniform.uniform_name_ && value_ == uniform.value_; }
-
-	protected:
-		UniformFloat(const std::string& uniform_name, value_type value);
-
-	protected:
-		value_type		value_;
 	};
 
 
@@ -71,7 +46,44 @@ namespace OGE
 		bool operator == (const UniformInt& uniform) const { return uniform_name_ == uniform.uniform_name_ && value_ == uniform.value_; }
 
 	protected:
-		UniformInt(const std::string& uniform_name, value_type value);
+		UniformInt(const std::string& uniform_name, value_type value) :
+			Uniform(uniform_name),
+			value_(value)
+		{
+			name_ = OGE_UniformInt;
+		}
+
+	protected:
+		value_type		value_;
+	};
+
+
+	class UniformFloat :public Uniform
+	{
+	public:
+		typedef float value_type;
+
+		//创建实例
+		static SPtr(UniformFloat) Create(const std::string& uniform_name, value_type value)
+		{
+			return SPtr(UniformFloat)(new UniformFloat(uniform_name, value));
+		}
+
+		SPtr(UniformFloat) Copy() const { return SPtr(UniformFloat)(new UniformFloat(uniform_name_, value_)); }
+
+		//获得/设置uniform值
+		value_type GetValue() const { return value_; }
+		void SetValue(value_type value) { value_ = value; }
+
+		bool operator == (const UniformFloat& uniform) const { return uniform_name_ == uniform.uniform_name_ && value_ == uniform.value_; }
+
+	protected:
+		UniformFloat(const std::string& uniform_name, value_type value) :
+			Uniform(uniform_name),
+			value_(value)
+		{
+			name_ = OGE_UniformFloat;
+		}
 
 	protected:
 		value_type		value_;
@@ -98,7 +110,12 @@ namespace OGE
 		bool operator == (const UniformVec2& uniform) const { return uniform_name_ == uniform.uniform_name_ && value_ == uniform.value_; }
 
 	protected:
-		UniformVec2(const std::string& uniform_name, const value_type& value);
+		UniformVec2(const std::string& uniform_name, const value_type& value) :
+			Uniform(uniform_name),
+			value_(value)
+		{
+			name_ = OGE_UniformVec2;
+		}
 
 	protected:
 		value_type		value_;
@@ -125,7 +142,12 @@ namespace OGE
 		bool operator == (const UniformVec3& uniform) const { return uniform_name_ == uniform.uniform_name_ && value_ == uniform.value_; }
 
 	protected:
-		UniformVec3(const std::string& uniform_name, const value_type& value);
+		UniformVec3(const std::string& uniform_name, const value_type& value) :
+			Uniform(uniform_name),
+			value_(value)
+		{
+			name_ = OGE_UniformVec3;
+		}
 
 	protected:
 		value_type		value_;
@@ -152,7 +174,12 @@ namespace OGE
 		bool operator == (const UniformVec4& uniform) const { return uniform_name_ == uniform.uniform_name_ && value_ == uniform.value_; }
 
 	protected:
-		UniformVec4(const std::string& uniform_name, const value_type& value);
+		UniformVec4(const std::string& uniform_name, const value_type& value) :
+			Uniform(uniform_name),
+			value_(value)
+		{
+			name_ = OGE_UniformVec4;
+		}
 
 	protected:
 		value_type		value_;
@@ -179,7 +206,12 @@ namespace OGE
 		bool operator == (const UniformMat& uniform) const { return uniform_name_ == uniform.uniform_name_ && value_ == uniform.value_; }
 
 	protected:
-		UniformMat(const std::string& uniform_name, const value_type& value);
+		UniformMat(const std::string& uniform_name, const value_type& value) :
+			Uniform(uniform_name),
+			value_(value)
+		{
+			name_ = OGE_UniformMat;
+		}
 
 	protected:
 		value_type		value_;

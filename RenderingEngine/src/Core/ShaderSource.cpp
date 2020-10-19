@@ -1,14 +1,12 @@
 #include "ShaderSource.h"
 
-#include <iostream>
-
 
 namespace OGE
 {
 	ShaderSource::ShaderSource(SPtr(Program) program) :
 		ContextObject()
 	{
-		name_ = "ShaderSource";
+		name_ = OGE_ShaderSource;
 		id_ = glCreateProgram();
 		CreateProgram(program);
 	}
@@ -19,54 +17,63 @@ namespace OGE
 		if (uniform == nullptr)
 			return;
 
+		//判断uniform是否存在
 		std::string uniform_name = uniform->GetUniformName();
 		int location = QueryLocation(uniform_name);
 		if (location == -1)
 			return;
 
-		std::string name = uniform->GetName();
-		if (name == "UniformInt")
+		//和当前值不等时才重新设置
+		SPtr(Uniform) current_uniform = nullptr;
+		auto iter = uniform_map_.find(location);
+		if (iter != uniform_map_.end())
+			current_uniform = iter->second;
+		switch (uniform->GetName())
 		{
-			int value = SPCast(UniformInt)(uniform)->GetValue();
-			//if (value == SPCast(UniformInt)(QueryUniform(location, uniform))->GetValue())
-			//	return;
+		case OGE_UniformInt:
+		{
+			int value = SPtrCast(UniformInt, uniform)->GetValue();
+			if (current_uniform != nullptr && value == SPtrCast(UniformInt, current_uniform)->GetValue())
+				return;
 			glUniform1i(location, value);
-		}
-		else if (name == "UniformFloat")
+		}break;
+		case OGE_UniformFloat:
 		{
-			float value = SPCast(UniformFloat)(uniform)->GetValue();
-			//if (value == SPCast(UniformFloat)(QueryUniform(location, uniform))->GetValue())
-			//	return;
+			float value = SPtrCast(UniformFloat, uniform)->GetValue();
+			if (current_uniform != nullptr && value == SPtrCast(UniformFloat, current_uniform)->GetValue())
+				return;
 			glUniform1f(location, value);
-		}
-		else if (name == "UniformVec2")
+		}break;
+		case OGE_UniformVec2:
 		{
-			Vec2 value = SPCast(UniformVec2)(uniform)->GetValue();
-			//if (value == SPCast(UniformVec2)(QueryUniform(location, uniform))->GetValue())
-			//	return;
+			Vec2 value = SPtrCast(UniformVec2, uniform)->GetValue();
+			if (current_uniform != nullptr && value == SPtrCast(UniformVec2, current_uniform)->GetValue())
+				return;
 			glUniform2fv(location, 1, value.Ptr());
-		}
-		else if (name == "UniformVec3")
+		}break;
+		case OGE_UniformVec3:
 		{
-			Vec3 value = SPCast(UniformVec3)(uniform)->GetValue();
-			//if (value == SPCast(UniformVec3)(QueryUniform(location, uniform))->GetValue())
-			//	return;
+			Vec3 value = SPtrCast(UniformVec3, uniform)->GetValue();
+			if (current_uniform != nullptr && value == SPtrCast(UniformVec3, current_uniform)->GetValue())
+				return;
 			glUniform3fv(location, 1, value.Ptr());
-		}
-		else if (name == "UniformVec4")
+		}break;
+		case OGE_UniformVec4:
 		{
-			Vec4 value = SPCast(UniformVec4)(uniform)->GetValue();
-			//if (value == SPCast(UniformVec4)(QueryUniform(location, uniform))->GetValue())
-			//	return;
+			Vec4 value = SPtrCast(UniformVec4, uniform)->GetValue();
+			if (current_uniform != nullptr && value == SPtrCast(UniformVec4, current_uniform)->GetValue())
+				return;
 			glUniform4fv(location, 1, value.Ptr());
-		}
-		else if (name == "UniformMat")
+		}break;
+		case OGE_UniformMat:
 		{
-			Matrix value = SPCast(UniformMat)(uniform)->GetValue();
-			//if (value == SPCast(UniformMat)(QueryUniform(location, uniform))->GetValue())
-			//	return;
+			Matrix value = SPtrCast(UniformMat, uniform)->GetValue();
+			if (current_uniform != nullptr && value == SPtrCast(UniformMat, current_uniform)->GetValue())
+				return;
 			glUniformMatrix4fv(location, 1, GL_FALSE, value.Ptr());
+		}break;
 		}
+		uniform_map_[location] = uniform;
 	}
 
 
@@ -83,17 +90,6 @@ namespace OGE
 			location_map_[name] = location;
 
 		return location;
-	}
-
-
-	SPtr(Uniform) ShaderSource::QueryUniform(int location, SPtr(Uniform) uniform)
-	{
-		auto iter = uniform_map_.find(location);
-		if (iter != uniform_map_.end())
-			return iter->second;
-
-		uniform_map_[location] = uniform;
-		return uniform;
 	}
 
 
@@ -133,7 +129,6 @@ namespace OGE
 		if (gs > 0)
 			glDeleteShader(gs);
 	}
-
 
 
 	void ShaderSource::CreateShader(SPtr(Shader) shader, unsigned int& id)

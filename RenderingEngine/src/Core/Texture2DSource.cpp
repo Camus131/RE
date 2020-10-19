@@ -6,7 +6,7 @@ namespace OGE
 	Texture2DSource::Texture2DSource(SPtr(Texture2D) texture) :
 		ContextObject()
 	{
-		name_ = "Texture2DSource";
+		name_ = OGE_Texture2DSource;
 		glGenTextures(1, &id_);
 		CreateTexture2D(texture);
 	}

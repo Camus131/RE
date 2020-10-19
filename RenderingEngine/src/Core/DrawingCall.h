@@ -1,12 +1,11 @@
 #pragma once
 
-#include "../Object/DrawArrays.h"
-#include "../Object/DrawElements.h"
+#include "Object/DrawingSet.h"
 
 
 namespace OGE
 {
-	class DrawingCall :public Object
+	class DrawingCall :public BaseObject
 	{
 	public:
 		//´´½¨ÊµÀý
@@ -22,7 +21,12 @@ namespace OGE
 		void SetDrawingSet(SPtr(DrawingSet) drawing_set) { drawing_set_ = drawing_set; }
 
 	protected:
-		DrawingCall(SPtr(DrawingSet) drawing_set);
+		DrawingCall(SPtr(DrawingSet) drawing_set):
+			BaseObject(),
+			drawing_set_(drawing_set)
+		{
+			name_ = OGE_DrawingCall;
+		}
 
 	protected:
 		SPtr(DrawingSet)		drawing_set_;

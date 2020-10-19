@@ -80,9 +80,9 @@ void Window::SizeChangeCallback(GLFWwindow* window, int width, int height)
     if (renderer_ == nullptr)
         return;
 
-    renderer_->SetWidth(width_);
-    renderer_->SetHeight(height_);
-    renderer_->SetViewPort();
+    renderer_->GetViewport()->SetWidth(width_);
+    renderer_->GetViewport()->SetHeight(height_);
+    renderer_->UpdateViewport();
 }
 
 
@@ -128,11 +128,11 @@ void Window::ProcessInput(GLFWwindow* window)
     if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
         renderer_->GetCamera()->Reset();
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        renderer_->GetCamera()->Move(OGE::FPSCamera::FORWARD, deltaTime);
+        renderer_->GetCamera()->Move(OGE::PerspectiveCamera::FORWARD, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        renderer_->GetCamera()->Move(OGE::FPSCamera::BACKWARD, deltaTime);
+        renderer_->GetCamera()->Move(OGE::PerspectiveCamera::BACKWARD, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        renderer_->GetCamera()->Move(OGE::FPSCamera::LEFT, deltaTime);
+        renderer_->GetCamera()->Move(OGE::PerspectiveCamera::LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        renderer_->GetCamera()->Move(OGE::FPSCamera::RIGHT, deltaTime);
+        renderer_->GetCamera()->Move(OGE::PerspectiveCamera::RIGHT, deltaTime);
 }

@@ -5,7 +5,7 @@
 
 namespace OGE
 {
-	class Program :public ExternalObject
+	class Program :public Interviewee
 	{
 	public:
 		//´´½¨ÊµÀý
@@ -29,7 +29,11 @@ namespace OGE
 		void Clear() { shader_list_.clear(); }
 
 	protected:
-		Program();
+		Program() :
+			Interviewee()
+		{
+			name_ = OGE_Program;
+		}
 
 	protected:
 		typedef std::vector<SPtr(Shader)> ShaderList;

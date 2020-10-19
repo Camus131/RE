@@ -1,13 +1,16 @@
 #pragma once
 
-#include "RenderingUnit.h"
+#include "PerspectiveCamera.h"
+#include "NodeVisitor.h"
 
-#include "../Scene/FPSCamera.h"
+#include "Object/Viewport.h"
+#include "Object/Group.h"
+#include "Object/Light.h"
 
 
 namespace OGE
 {
-	class Renderer :public Object
+	class Renderer :public BaseObject
 	{
 	public:
 		//创建实例
@@ -17,46 +20,49 @@ namespace OGE
 		}
 
 		//设置/获得相机
-		void SetCamera(SPtr(FPSCamera) camera) { camera_ = camera; }
-		SPtr(FPSCamera) GetCamera() const { return camera_; }
+		SPtr(PerspectiveCamera) GetCamera() const { return camera_; }
+		void SetCamera(SPtr(PerspectiveCamera) camera) { camera_ = camera; }
 
-		//设置场景树
-		void SetScene(const std::vector<SPtr(Mesh)>& meshes);
+		//获得/设置场景
+		SPtr(Group) GetScene() const { return bvh_tree_; }
+		void SetScene(SPtr(Group) tree) { bvh_tree_ = tree; }
+
+		//获得/设置视口
+		SPtr(Viewport) GetViewport() const { return viewport_; }
+		void SetViewport(SPtr(Viewport) viewport) { viewport_ = viewport; }
+		void UpdateViewport() { glViewport(viewport_->GetX(), viewport_->GetY(), viewport_->GetWidth(), viewport_->GetHeight()); }
+
+		//获得/设置光源
+		std::vector<SPtr(Light)> GetLights() const { return lights_; }
+		void SetLights(const std::vector<SPtr(Light)>& lights) { lights_ = lights; }
 
 		//渲染一帧
 		void Frame();
 
-		//获得/设置视口
-		int GetWidth() const { return width_; }
-		void SetWidth(int width) { width_ = width; }
-		int GetHeight() const { return height_; }
-		void SetHeight(int height) { height_ = height; }
-		void SetViewPort() const { glViewport(0, 0, width_, height_); }
+	protected:
+		Renderer() :
+			BaseObject(),
+			first_frame_(true)
+		{
+			name_ = OGE_Renderer;
+		}
+
+		//初始化
+		void Init();
 
 	protected:
-		Renderer();
+		bool								first_frame_;
 
-		//更新渲染树
-		void Update();
+		SPtr(PerspectiveCamera)				camera_;
 
-	protected:
-		//相机
-		SPtr(FPSCamera)						camera_;
+		SPtr(Group)							bvh_tree_;
 
-		//视口
-		int									width_;
-		int									height_;
+		SPtr(Viewport)						viewport_;
 
-		//更新开关
-		bool								update_switch_;
+		std::vector<SPtr(Light)>		    lights_;
 
-		//场景树
-		std::vector<SPtr(Mesh)>				meshes_;
+		NodeVisitor::StateTree				state_tree_;
 
-		std::vector<SPtr(RenderingUnit)>	rendering_units_;
-
-		typedef std::map<SPtr(ShaderSource), std::map<SPtr(Texture2DSource), std::map<SPtr(Texture2DSource), std::map<SPtr(Texture2DSource), std::vector<SPtr(RenderingUnit)>>>>> RenderTree;
-		//渲染树
-		RenderTree render_tree_;
+		NodeVisitor::StateTree				transparent_state_tree_;
 	};
 }

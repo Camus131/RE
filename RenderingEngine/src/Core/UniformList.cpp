@@ -3,13 +3,6 @@
 
 namespace OGE
 {
-	UniformList::UniformList() :
-		Object()
-	{
-		name_ = "UniformList";
-	}
-
-
 	void UniformList::AddUniform(SPtr(Uniform) uniform)
 	{
 		for (auto iter = uniform_list_.begin(); iter != uniform_list_.end(); ++iter)

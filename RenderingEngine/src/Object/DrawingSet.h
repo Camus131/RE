@@ -1,11 +1,11 @@
 #pragma once
 
-#include "ExternalObject.h"
+#include "Core/Interviewee.h"
 
 
 namespace OGE
 {
-	class DrawingSet :public ExternalObject
+	class DrawingSet :public Interviewee
 	{
 	public:
 		//绘制图元模式
@@ -31,7 +31,7 @@ namespace OGE
 
 	protected:
 		DrawingSet(Mode mode = TRIANGLES, int instanced_num = 1) :
-			ExternalObject(),
+			Interviewee(),
 			mode_(mode),
 			instanced_num_(instanced_num) {}
 

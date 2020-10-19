@@ -24,9 +24,6 @@
     <ClCompile Include="src\ThirdParty\stb_image.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\Scene\FPSCamera.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="src\ReadFile\Model.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -48,9 +45,6 @@
     <ClCompile Include="src\Object\Texture2D.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\Object\Uniform.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="src\Object\State.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -60,16 +54,10 @@
     <ClCompile Include="src\Object\Light.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\Object\Mesh.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="src\Object\DrawElements.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\Object\DrawArrays.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Core\MeshVisitor.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="src\Core\Texture2DSource.cpp">
@@ -87,6 +75,27 @@
     <ClCompile Include="src\Window\Window.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="src\Object\Group.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Mesh.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Cube.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\NodeVisitor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object\Transform.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\PerspectiveCamera.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\Frustum.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -99,9 +108,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\Math\Math.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\VertexAttribute.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\Math\Vec2f.h">
@@ -131,19 +137,10 @@
     <ClInclude Include="src\Core\IndexBuffer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\Math\EulerAngles.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Math\Quat.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="src\Core\VertexArray.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\ThirdParty\stb_image.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Scene\FPSCamera.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\ReadFile\Model.h">
@@ -153,12 +150,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\ContextObject.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\Object.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Object\ExternalObject.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\Visitor.h">
@@ -191,9 +182,6 @@
     <ClInclude Include="src\Object\Light.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="src\Object\Mesh.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="src\Object\DrawingSet.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -201,9 +189,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\Object\DrawArrays.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Core\MeshVisitor.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\Texture2DSource.h">
@@ -222,6 +207,60 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\Window\Window.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Node.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Group.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Leaf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Transform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Cube.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Mesh.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\NodeVisitor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\PerspectiveCamera.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Math\EulerAnglesd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Math\EulerAnglesf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Math\BoundingBoxd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Math\BoundingBoxf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Math\Planef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Math\Planed.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Interviewee.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Object\Viewport.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\BaseObject.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\Frustum.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
