@@ -18,62 +18,53 @@ namespace OGE
 			return;
 
 		//判断uniform是否存在
-		std::string uniform_name = uniform->GetUniformName();
-		int location = QueryLocation(uniform_name);
+		int location = QueryLocation(uniform->GetUniformName());
 		if (location == -1)
 			return;
 
-		//和当前值不等时才重新设置
-		SPtr(Uniform) current_uniform = nullptr;
-		auto iter = uniform_map_.find(location);
-		if (iter != uniform_map_.end())
-			current_uniform = iter->second;
 		switch (uniform->GetName())
 		{
 		case OGE_UniformInt:
 		{
 			int value = SPtrCast(UniformInt, uniform)->GetValue();
-			if (current_uniform != nullptr && value == SPtrCast(UniformInt, current_uniform)->GetValue())
-				return;
 			glUniform1i(location, value);
 		}break;
 		case OGE_UniformFloat:
 		{
 			float value = SPtrCast(UniformFloat, uniform)->GetValue();
-			if (current_uniform != nullptr && value == SPtrCast(UniformFloat, current_uniform)->GetValue())
-				return;
 			glUniform1f(location, value);
 		}break;
 		case OGE_UniformVec2:
 		{
 			Vec2 value = SPtrCast(UniformVec2, uniform)->GetValue();
-			if (current_uniform != nullptr && value == SPtrCast(UniformVec2, current_uniform)->GetValue())
-				return;
 			glUniform2fv(location, 1, value.Ptr());
 		}break;
 		case OGE_UniformVec3:
 		{
 			Vec3 value = SPtrCast(UniformVec3, uniform)->GetValue();
-			if (current_uniform != nullptr && value == SPtrCast(UniformVec3, current_uniform)->GetValue())
-				return;
 			glUniform3fv(location, 1, value.Ptr());
 		}break;
 		case OGE_UniformVec4:
 		{
 			Vec4 value = SPtrCast(UniformVec4, uniform)->GetValue();
-			if (current_uniform != nullptr && value == SPtrCast(UniformVec4, current_uniform)->GetValue())
-				return;
 			glUniform4fv(location, 1, value.Ptr());
 		}break;
 		case OGE_UniformMat:
 		{
 			Matrix value = SPtrCast(UniformMat, uniform)->GetValue();
-			if (current_uniform != nullptr && value == SPtrCast(UniformMat, current_uniform)->GetValue())
-				return;
 			glUniformMatrix4fv(location, 1, GL_FALSE, value.Ptr());
 		}break;
 		}
-		uniform_map_[location] = uniform;
+	}
+
+
+	void ShaderSource::SetUniforms(SPtr(UniformList) uniforms)
+	{
+		if (uniforms == nullptr)
+			return;
+
+		for (int i = 0; i < uniforms->GetUniformNum(); ++i)
+			SetUniform(uniforms->GetUniform(i));
 	}
 
 

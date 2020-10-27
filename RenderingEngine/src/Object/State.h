@@ -30,21 +30,23 @@ namespace OGE
 		SPtr(Material) GetMaterial() { return material_; }
 		void SetMaterial(SPtr(Material) material) { material_ = material; }
 
-		//获得/设置alpha
-		float GetAlpha() { return alpha_; }
-		void SetAlpha(float alpha) { alpha_ = alpha; }
+		//获得/设置透明度
+		float GetTransparent() { return transparent_; }
+		void SetTransparent(float transparent) { transparent_ = transparent; }
 
 	protected:
 		PhongState() :
-			State()
+			State(),
+			transparent_(0.0f)
 		{
 			name_ = OGE_PhongState;
+			material_ = Material::Create();
 		}
 
 	protected:
 		SPtr(Material)		material_;
 
-		float				alpha_;
+		float				transparent_;
 	};
 
 

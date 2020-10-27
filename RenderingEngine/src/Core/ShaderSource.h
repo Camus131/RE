@@ -1,9 +1,9 @@
 #pragma once
 
 #include "ContextObject.h"
+#include "UniformList.h"
 
 #include "Object/Program.h"
-#include "Object/Uniform.h"
 
 
 namespace OGE
@@ -27,6 +27,7 @@ namespace OGE
 
 		//设置uniform变量的值
 		void SetUniform(SPtr(Uniform) uniform);
+		void SetUniforms(SPtr(UniformList) uniforms);
 
 	protected:
 		ShaderSource(SPtr(Program) program);
@@ -44,9 +45,5 @@ namespace OGE
 		typedef std::unordered_map<std::string, int>	LocationMap;
 		//uniform变量名及其location的映射表
 		LocationMap			location_map_;
-
-		typedef std::unordered_map<int, SPtr(Uniform)>	UniformMap;
-		//启用中的uniform映射表
-		UniformMap			uniform_map_;
 	};
 }

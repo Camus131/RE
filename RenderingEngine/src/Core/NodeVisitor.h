@@ -1,11 +1,11 @@
 #pragma once
 
 #include "RenderingUnit.h"
+#include "StateVisitor.h"
 
 #include "Object/Transform.h"
 #include "Object/Mesh.h"
 #include "Object/Cube.h"
-#include "Object/Light.h"
 
 
 namespace OGE
@@ -26,7 +26,7 @@ namespace OGE
 
 		//获得状态树
 		StateTree GetTree() const { return tree_; }
-		StateTree GetTransparentTree() const { return transparent_tree_; }
+		std::vector<SPtr(RenderingUnit)> GetTransparentTree() const { return transparent_tree_; }
 
 	protected:
 		NodeVisitor(const std::vector<SPtr(Light)>& lights);
@@ -37,21 +37,19 @@ namespace OGE
 		void Process(SPtr(Transform) transform);
 
 	protected:
-		SPtr(PhongState)				state_;
+		SPtr(PhongState)							state_;
 
-		std::vector<SPtr(Light)>		lights_;
+		std::vector<SPtr(Light)>					lights_;
 
 		//不透明状态树
-		StateTree						tree_;
+		StateTree									tree_;
 
 		//透明状态树
-		StateTree						transparent_tree_;
+		std::vector<SPtr(RenderingUnit)>			transparent_tree_;
 
-		//临时变量
-		std::map<std::vector<std::string>, SPtr(ShaderSource)>		shaders_;
-		std::map<SPtr(Texture2D), SPtr(Texture2DSource)>			emission_maps_;
-		std::map<SPtr(Texture2D), SPtr(Texture2DSource)>			diffuse_maps_;
-		std::map<SPtr(Texture2D), SPtr(Texture2DSource)>			specular_maps_;
-		std::map<SPtr(Leaf), SPtr(RenderingUnit)>					units_;
+		//记录map
+		std::map<SPtr(Leaf), SPtr(RenderingUnit)>	units_;
+
+		SPtr(StateVisitor)							state_visitor_;
 	};
 }

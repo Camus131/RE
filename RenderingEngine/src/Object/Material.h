@@ -43,7 +43,7 @@ namespace OGE
 			Interviewee(),
 			diffuse_color_(Vec3(0.8f, 0.8f, 0.8f)),
 			specular_color_(Vec3(0.0f, 0.0f, 0.0f)),
-			shininess_(0.0f),
+			shininess_(1.0f),
 			emission_color_(Vec3(0.0f, 0.0f, 0.0f))
 		{
 			name_ = OGE_Material;

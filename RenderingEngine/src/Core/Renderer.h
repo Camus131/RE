@@ -42,7 +42,8 @@ namespace OGE
 	protected:
 		Renderer() :
 			BaseObject(),
-			first_frame_(true)
+			first_frame_(true),
+			fps_(0.0)
 		{
 			name_ = OGE_Renderer;
 		}
@@ -63,6 +64,11 @@ namespace OGE
 
 		NodeVisitor::StateTree				state_tree_;
 
-		NodeVisitor::StateTree				transparent_state_tree_;
+		std::vector<SPtr(RenderingUnit)>	transparent_state_tree_;
+
+		SPtr(UniformList)					lights_uniforms_;
+
+		//Ö¡Êý
+		double								fps_;
 	};
 }

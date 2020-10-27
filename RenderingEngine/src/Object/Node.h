@@ -20,7 +20,7 @@ namespace OGE
 
 		//获得/设置渲染状态
 		SPtr(State) GetState() const { return state_; }
-		void SetState(SPtr(State) state) { state_ = state; }
+		void SetState(SPtr(State) state) { state_ = state; transfer_state_ = state; }
 
 		//获得父节点信息
 		unsigned int GetParentsNum() const { return parents_.size(); }
@@ -47,6 +47,7 @@ namespace OGE
 
 		//标记
 		int				mask_;
-		Matrix			transfer_;
+		Matrix			transfer_matrix_;
+		SPtr(State)		transfer_state_;
 	};
 }

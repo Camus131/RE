@@ -1,5 +1,8 @@
 #include "Renderer.h"
 
+#include <windows.h>
+#include <ctime>
+
 
 namespace OGE
 {
@@ -10,6 +13,9 @@ namespace OGE
 			Init();
 			first_frame_ = false;
 		}
+
+		//记时
+		clock_t start_time = clock();
 
 		glClearColor(0.2f, 0.8f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -23,6 +29,7 @@ namespace OGE
 			shader->Bind();
 			shader->SetUniform(projection);
 			shader->SetUniform(view);
+			shader->SetUniforms(lights_uniforms_);
 			for (auto iter_t0 = iter_shader->second.begin(); iter_t0 != iter_shader->second.end(); ++iter_t0)
 			{
 				SPtr(Texture2DSource) texture0 = iter_t0->first;
@@ -45,12 +52,8 @@ namespace OGE
 							for (int i = 0; i < iter_vao->second.size(); ++i)
 							{
 								SPtr(RenderingUnit) unit = (iter_vao->second)[i];
-								SPtr(UniformList) model_matrixs = unit->GetModelMatrixs();
-								for (int num = 0; num < model_matrixs->GetUniformNum(); ++num)
-									shader->SetUniform(model_matrixs->GetUniform(num));
-								SPtr(UniformList) materials = unit->GetMaterials();
-								for (int num = 0; num < materials->GetUniformNum(); ++num)
-									shader->SetUniform(materials->GetUniform(num));
+								shader->SetUniforms(unit->GetModelMatrixs());
+								shader->SetUniforms(unit->GetMaterials());
 								unit->GetDrawingCall()->Draw();
 							}
 						}
@@ -58,6 +61,58 @@ namespace OGE
 				}
 			}
 		}
+
+		if (!transparent_state_tree_.empty())
+		{
+			glDepthMask(GL_FALSE);
+			std::map<float, std::vector<SPtr(RenderingUnit)>> transparent_map;
+			for (int i = 0; i < transparent_state_tree_.size(); ++i)
+			{
+				Matrix  model_matrix = SPtrCast(UniformMat, transparent_state_tree_[i]->GetModelMatrixs()->GetUniform("model"))->GetValue();
+				Vec3 center = transparent_state_tree_[i]->GetLeaf()->GetBoundingBox().Center();
+				center = camera_->ViewMatrix() * model_matrix * center;
+				transparent_map[center.z()].emplace_back(transparent_state_tree_[i]);
+			}
+			for (auto iter = transparent_map.begin(); iter != transparent_map.end(); ++iter)
+			{
+				float t = iter->first;
+				for (int i = 0; i < iter->second.size(); ++i)
+				{
+					SPtr(RenderingUnit) unit = iter->second[i];
+					SPtr(ShaderSource) shader = unit->GetShader();
+					shader->Bind();
+					shader->SetUniform(projection);
+					shader->SetUniform(view);
+					shader->SetUniforms(lights_uniforms_);
+					SPtr(Texture2DSource) texture0 = unit->GetEmissionMap();
+					if (texture0 != nullptr)
+						texture0->Bind();
+					SPtr(Texture2DSource) texture1 = unit->GetDiffuseMap();
+					if (texture1 != nullptr)
+						texture1->Bind(1);
+					SPtr(Texture2DSource) texture2 = unit->GetSpecularMap();
+					if (texture2 != nullptr)
+						texture2->Bind(2);
+					unit->GetVAO()->Bind();
+					shader->SetUniforms(unit->GetModelMatrixs());
+					shader->SetUniforms(unit->GetMaterials());
+					unit->GetDrawingCall()->Draw();
+				}
+			}
+			glDepthMask(GL_TRUE);
+		}
+
+		//记录帧率
+		clock_t end_time = clock();
+		double frame_time = static_cast<double>(end_time - start_time);
+		double sleep_time = 50.0 / 3.0 - frame_time;
+		if (sleep_time > 0.0)
+		{
+			Sleep(sleep_time);
+			frame_time += sleep_time;
+		}
+		fps_ = 1000.0 / frame_time;
+		std::cout << fps_ << std::endl;
 	}
 
 
@@ -82,6 +137,25 @@ namespace OGE
 		if (lights_.empty())
 			lights_.emplace_back(DirLight::Create());
 
+		//添加光源
+		lights_uniforms_ = UniformList::Create();
+		ObjectName name = lights_[0]->GetName();
+		switch (name)
+		{
+		case OGE_DirLight:
+		{
+			SPtr(DirLight) dir_light = SPtrCast(DirLight, lights_[0]);
+			lights_uniforms_->AddUniform(UniformVec3::Create("dirLight.ambient", dir_light->GetAmbient()));
+			lights_uniforms_->AddUniform(UniformVec3::Create("dirLight.diffuse", dir_light->GetDiffuse()));
+			lights_uniforms_->AddUniform(UniformVec3::Create("dirLight.specular", dir_light->GetSpecular()));
+			lights_uniforms_->AddUniform(UniformVec3::Create("dirLight.direction", dir_light->GetDir()));
+		}break;
+		case OGE_PointLight:
+		{
+
+		}break;
+		}
+
 		SPtr(NodeVisitor) visitor = NodeVisitor::Create(lights_);
 		bvh_tree_->Accept(visitor);
 
@@ -89,5 +163,7 @@ namespace OGE
 		transparent_state_tree_ = visitor->GetTransparentTree();
 
 		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 }

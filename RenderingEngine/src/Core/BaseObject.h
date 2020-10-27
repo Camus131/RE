@@ -56,6 +56,7 @@ namespace OGE
 		OGE_Cube,
 		OGE_Viewport,
 		OGE_PerspectiveCamera,
+		OGE_StateVisitor,
 	};
 
 	class BaseObject :public std::enable_shared_from_this<BaseObject>

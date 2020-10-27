@@ -6,7 +6,6 @@
 #include "ShaderSource.h"
 #include "DrawingCall.h"
 #include "Texture2DSource.h"
-#include "UniformList.h"
 
 #include "Object/Leaf.h"
 

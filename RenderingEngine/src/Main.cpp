@@ -10,8 +10,7 @@ int main()
 {
 	Window window = Window::GetInstance();
 
-	//创建state
-	SPtr(PhongState) state = PhongState::Create();
+	//材质
 	SPtr(Material) material = Material::Create();
 	SPtr(Image) image = Image::Create("res/textures/container2.png");
 	SPtr(Texture2D) diffuse_map = Texture2D::Create(image);
@@ -28,9 +27,7 @@ int main()
 	material->SetDiffuseMap(diffuse_map);
 	material->SetSpecularMap(specular_map);
 	material->SetShininess(64.0f);
-	state->SetMaterial(material);
 
-	SPtr(PhongState) state2 = PhongState::Create();
 	SPtr(Material) material2 = Material::Create();
 	SPtr(Image) image3 = Image::Create("res/textures/timg.jpg");
 	SPtr(Texture2D) diffuse_map2 = Texture2D::Create(image3);
@@ -39,69 +36,61 @@ int main()
 	diffuse_map2->SetMipMapEnable(true);
 	diffuse_map2->SetInternalFormat(Texture2D::Format::RGB);
 	material2->SetDiffuseMap(diffuse_map2);
-	state2->SetMaterial(material2);
+
+	//state
+	SPtr(PhongState) state = PhongState::Create();
+	state->SetMaterial(material);
+
+	SPtr(PhongState) state2 = PhongState::Create();
+	state2->SetMaterial(material);
+	state2->SetTransparent(0.4f);
+
+	SPtr(PhongState) state3 = PhongState::Create();
+	state3->SetMaterial(material2);
 
 	//创建场景
 	SPtr(Group) scene = Group::Create();
-	scene->SetState(state);
-
-#if 1
-	SPtr(Group) group = Group::Create();
-	group->SetState(state2);
-	scene->AddChild(group);
-
-	for (int i = 0; i < 100; ++i)
-	{
-		for (int j = 0; j < 100; ++j)
-		{
-			SPtr(Cube) cube2 = Cube::Create();
-			cube2->SetUvEnable(true);
-			SPtr(Transform) transform = Transform::Create(Matrix::Translate(i, -1.01f, j));
-			transform->AddChild(cube2);
-			group->AddChild(transform);
-		}
-	}
-
-	srand((int)time(0));
-	for (int i = 0; i < 5000; ++i)
-	{
-		SPtr(Cube) cube = Cube::Create();
-		cube->SetUvEnable(true);
-		int x = rand() % 100;
-		int z = rand() % 100;
-		SPtr(Transform) transform = Transform::Create(Matrix::Translate(x, 0.0f, z));
-		transform->AddChild(cube);
-		scene->AddChild(transform);
-	}
-#else
-	SPtr(Group) group = Group::Create();
-	group->SetState(state2);
-	scene->AddChild(group);
-
-	SPtr(Cube) cube2 = Cube::Create();
-	cube2->SetUvEnable(true);
-	for (int i = 0; i < 100; ++i)
-	{
-		for (int j = 0; j < 100; ++j)
-		{
-			SPtr(Transform) transform = Transform::Create(Matrix::Translate(i, -1.01f, j));
-			transform->AddChild(cube2);
-			group->AddChild(transform);
-		}
-	}
 
 	SPtr(Cube) cube = Cube::Create();
 	cube->SetUvEnable(true);
+
+	SPtr(Group) group = Group::Create();
+	group->SetState(state);
+	scene->AddChild(group);
 	srand((int)time(0));
-	for (int i = 0; i < 5000; ++i)
+	for (int i = 0; i < 500; ++i)
 	{
-		int x = rand() % 100;
-		int z = rand() % 100;
+		int x = rand() % 90;
+		int z = rand() % 90;
 		SPtr(Transform) transform = Transform::Create(Matrix::Translate(x, 0.0f, z));
 		transform->AddChild(cube);
-		scene->AddChild(transform);
+		group->AddChild(transform);
 	}
-#endif
+
+	SPtr(Group) group2 = Group::Create();
+	group2->SetState(state2);
+	scene->AddChild(group2);
+	for (int i = 0; i < 2500; ++i)
+	{
+		int x = rand() % 90;
+		int z = rand() % 90;
+		SPtr(Transform) transform = Transform::Create(Matrix::Translate(x, 0.0f, z));
+		transform->AddChild(cube);
+		group2->AddChild(transform);
+	}
+
+	SPtr(Group) group3 = Group::Create();
+	group3->SetState(state3);
+	scene->AddChild(group3);
+	for (int i = 0; i < 90; ++i)
+	{
+		for (int j = 0; j < 90; ++j)
+		{
+			SPtr(Transform) transform = Transform::Create(Matrix::Translate(i, -1.01f, j));
+			transform->AddChild(cube);
+			group3->AddChild(transform);
+		}
+	}
 
 	//创建渲染器
 	SPtr(Renderer) renderer = Renderer::Create();
