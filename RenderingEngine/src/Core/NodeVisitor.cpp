@@ -108,8 +108,8 @@ namespace OGE
 		}
 		if (uv_array_size > 0)
 		{
-			vbo->UpdateData(mesh->uv_array_, norm_array_size);
-			vao->EnableSetAttrib(2, 2, 2 * sizeof(float), norm_array_size);
+			vbo->UpdateData(mesh->uv_array_, pos_array_size + norm_array_size);
+			vao->EnableSetAttrib(2, 2, 2 * sizeof(float), pos_array_size + norm_array_size);
 		}
 		switch (mesh->drawing_set_->GetName())
 		{
@@ -482,10 +482,9 @@ namespace OGE
 
 	void NodeVisitor::Process(SPtr(Group) group)
 	{
-		//确保每个节点只处理一次
-		if (group->mask_)
-			return;
-		group->mask_ = 1;
+		//if (group->mask_)
+		//	return;
+		//group->mask_ = 1;
 
 		if (group->children_.empty())
 			return;
@@ -506,10 +505,9 @@ namespace OGE
 
 	void NodeVisitor::Process(SPtr(Transform) transform)
 	{
-		//确保每个节点只处理一次
-		if (transform->mask_)
-			return;
-		transform->mask_ = 1;
+		//if (transform->mask_)
+		//	return;
+		//transform->mask_ = 1;
 
 		if (transform->children_.empty())
 			return;

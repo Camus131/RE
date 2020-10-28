@@ -128,10 +128,11 @@ namespace OGE
 		{
 			BoundingBox box = bvh_tree_->GetBoundingBox();
 			Vec3 corner = box.Corner(4);
-			Vec3 eye(corner.x() + (box.xmax() - box.xmin()) * 0.5f, 0.5f, corner.z() + 0.5f);
+			Vec3 eye(corner.x() + (box.xmax() - box.xmin()) * 0.5f, corner.y() + (box.ymax() - box.ymin()) * 0.5f, corner.z() + (box.zmax() - box.zmin()) * 0.5f);
 			Vec3 target(eye.x(), eye.y(), eye.z() - 1.0f);
 			Vec3 up = Y_AXIS;
 			camera_ = PerspectiveCamera::Create(eye, target, up, 45.0f, viewport_->AspectRatio(), 0.1f, 1000.0f);
+			camera_->SetMovingSpeed(5.0f);
 		}
 
 		if (lights_.empty())

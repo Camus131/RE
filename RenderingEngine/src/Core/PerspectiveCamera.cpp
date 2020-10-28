@@ -62,7 +62,7 @@ namespace OGE
 		}
 
 		//限定移动平面
-		eye_.y() = 0.5f;
+		//eye_.y() = 0.5f;
 	}
 
 

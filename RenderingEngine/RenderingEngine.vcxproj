@@ -97,7 +97,8 @@
       <AdditionalDependencies>glad/glad64.lib;assimp/assimp-vc142-mt64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y/r ..\Dependencies\dll\assimp\assimp-vc142-mt64.dll ..\$(Platform)\$(Configuration)\</Command>
+      <Command>xcopy /y/r ..\Dependencies\dll\assimp\assimp-vc142-mt.dll ..\$(Platform)\$(Configuration)\
+xcopy /y/r ..\Dependencies\dll\assimp\assimp-vc142-mt64.dll ..\$(Platform)\$(Configuration)\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -116,7 +117,8 @@
       <AdditionalDependencies>glad/glad64.lib;assimp/assimp-vc142-mt64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y/r ..\Dependencies\dll\assimp\assimp-vc142-mt64.dll ..\$(Platform)\$(Configuration)\</Command>
+      <Command>xcopy /y/r ..\Dependencies\dll\assimp\assimp-vc142-mt.dll ..\$(Platform)\$(Configuration)\
+xcopy /y/r ..\Dependencies\dll\assimp\assimp-vc142-mt64.dll ..\$(Platform)\$(Configuration)\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -139,7 +141,8 @@
       <AdditionalDependencies>glad/glad64.lib;assimp/assimp-vc142-mt64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y/r ..\Dependencies\dll\assimp\assimp-vc142-mt64.dll ..\$(Platform)\$(Configuration)\</Command>
+      <Command>xcopy /y/r ..\Dependencies\dll\assimp\assimp-vc142-mt.dll ..\$(Platform)\$(Configuration)\
+xcopy /y/r ..\Dependencies\dll\assimp\assimp-vc142-mt64.dll ..\$(Platform)\$(Configuration)\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -162,7 +165,8 @@
       <AdditionalDependencies>glad/glad64.lib;assimp/assimp-vc142-mt64.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y/r ..\Dependencies\dll\assimp\assimp-vc142-mt64.dll ..\$(Platform)\$(Configuration)\</Command>
+      <Command>xcopy /y/r ..\Dependencies\dll\assimp\assimp-vc142-mt.dll ..\$(Platform)\$(Configuration)\
+xcopy /y/r ..\Dependencies\dll\assimp\assimp-vc142-mt64.dll ..\$(Platform)\$(Configuration)\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
