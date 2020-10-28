@@ -27,7 +27,8 @@ int main()
 	group->SetState(state);
 	scene->AddChild(group);
 
-#if 0
+#if 1
+	//优化版
 	SPtr(Cube) cube = Cube::Create();
 	cube->SetUvEnable(true);
 	for (int i = 0; i < 100; ++i)
@@ -50,7 +51,6 @@ int main()
 		scene->AddChild(transform);
 	}
 #else
-	//优化版
 	for (int i = 0; i < 100; ++i)
 	{
 		for (int j = 0; j < 100; ++j)
