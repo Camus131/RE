@@ -5,21 +5,32 @@ namespace OGE
 {
     PerspectiveCamera::PerspectiveCamera(const Vec3& eye, const Vec3& target, const Vec3& up, value_type fov, value_type ratio,
         value_type near_dis, value_type far_dis, value_type moving_speed, value_type turning_speed) :
-        Frustum(fov, ratio, near_dis, far_dis)
+        Frustum(near_dis, far_dis)
     {
         name_ = OGE_PerspectiveCamera;
 
+		SetFov(fov);
+		SetRatio(ratio);
 		init_eye_ = eye;
 		init_front_ = (target - eye).Normalize();
 		init_up_ = Vec3::Normalize(up);
 		eye_ = init_eye_;
 		rotate_angles_.Zero();
-		SetFov(fov);
 		SetMovingSpeed(moving_speed);
 		SetTurningSpeed(turning_speed);
 		ComputePos();
-		ComputeWorldPlanes();
+		ComputePlanes();
     }
+
+
+	void PerspectiveCamera::SetFov(value_type fov)
+	{
+		fov_ = fov;
+		if (fov_ < 1.0f)
+			fov_ = 1.0f;
+		if (fov_ > 90.0f)
+			fov_ = 90.0f;
+	}
 
 
 	void PerspectiveCamera::SetMovingSpeed(value_type speed)
@@ -90,32 +101,40 @@ namespace OGE
 	}
 
 
-	void PerspectiveCamera::ComputeWorldPlanes()
+	void PerspectiveCamera::ComputePlanes()
 	{
-		ComputePlanes();
+		value_type ratio = far_dis_ / near_dis_;
+		Vec3 near_right_top(OGE::Tan(fov_ / 2) * near_dis_ * ratio_, OGE::Tan(fov_ / 2) * near_dis_, -near_dis_);
+		Vec3 near_right_bottom(near_right_top.x(), -near_right_top.y(), near_right_top.z());
+		Vec3 near_left_bottom(-near_right_top.x(), -near_right_top.y(), near_right_top.z());
+		Vec3 near_left_top(-near_right_top.x(), near_right_top.y(), near_right_top.z());
+		Vec3 far_right_top = near_right_top * ratio;
+		Vec3 far_right_bottom = near_right_bottom * ratio;
+		Vec3 far_left_bottom = near_left_bottom * ratio;
+		Vec3 far_left_top = near_left_top * ratio;
+
+		near_plane_.Set(near_right_bottom, near_right_top, near_left_top);
+		far_plane_.Set(far_left_bottom, far_left_top, far_right_top);
+		bottom_plane_.Set(far_right_bottom, near_right_bottom, near_left_bottom);
+		top_plane_.Set(near_right_top, far_right_top, far_left_top);
+		left_plane_.Set(near_left_bottom, near_left_top, far_left_top);
+		right_plane_.Set(far_right_bottom, far_right_top, near_right_top);
 
 		Matrix view_matrix = ViewMatrix();
 
-		near_plane_world_ = near_plane_;
-		far_plane_world_ = far_plane_;
-		bottom_plane_world_ = bottom_plane_;
-		top_plane_world_ = top_plane_;
-		left_plane_world_ = left_plane_;
-		right_plane_world_ = right_plane_;
-
-		near_plane_world_.TransformByPreInverse(view_matrix);
-		far_plane_world_.TransformByPreInverse(view_matrix);
-		bottom_plane_world_.TransformByPreInverse(view_matrix);
-		top_plane_world_.TransformByPreInverse(view_matrix);
-		left_plane_world_.TransformByPreInverse(view_matrix);
-		right_plane_world_.TransformByPreInverse(view_matrix);
+		near_plane_.TransformByPreInverse(view_matrix);
+		far_plane_.TransformByPreInverse(view_matrix);
+		bottom_plane_.TransformByPreInverse(view_matrix);
+		top_plane_.TransformByPreInverse(view_matrix);
+		left_plane_.TransformByPreInverse(view_matrix);
+		right_plane_.TransformByPreInverse(view_matrix);
 	}
 
 
 	bool PerspectiveCamera::Intersect(const BoundingBox& bb)
 	{
-		if (near_plane_world_.Intersect(bb) == 1 || far_plane_world_.Intersect(bb) == 1 || bottom_plane_world_.Intersect(bb) == 1 ||
-			top_plane_world_.Intersect(bb) == 1 || left_plane_world_.Intersect(bb) == 1 || right_plane_world_.Intersect(bb) == 1)
+		if (near_plane_.Intersect(bb) == 1 || far_plane_.Intersect(bb) == 1 || bottom_plane_.Intersect(bb) == 1 ||
+			top_plane_.Intersect(bb) == 1 || left_plane_.Intersect(bb) == 1 || right_plane_.Intersect(bb) == 1)
 			return false;
 		return true;
 	}

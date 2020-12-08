@@ -11,10 +11,10 @@ namespace OGE
 		switch (object->GetName())
 		{
 		case OGE_PhongState:
-			Process(SPtrCast(PhongState, object));
+			Process(SPCast(PhongState, object));
 			break;
 		case OGE_CustomState:
-			Process(SPtrCast(CustomState, object));
+			Process(SPCast(CustomState, object));
 			break;
 		}
 	}

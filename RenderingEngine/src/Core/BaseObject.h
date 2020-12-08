@@ -12,8 +12,8 @@
 
 namespace OGE
 {
-#define SPtr(T)				std::shared_ptr<T>
-#define SPtrCast(T,V)		std::static_pointer_cast<T>(V)	
+#define SPtr(T)			std::shared_ptr<T>
+#define SPCast(T,V)		std::static_pointer_cast<T>(V)	
 
 	enum  ObjectName
 	{
@@ -56,6 +56,7 @@ namespace OGE
 		OGE_Cube,
 		OGE_Viewport,
 		OGE_PerspectiveCamera,
+		OGE_OrthoCamera,
 		OGE_StateVisitor,
 	};
 

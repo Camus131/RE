@@ -27,6 +27,14 @@ namespace OGE
                 near_dis, far_dis, moving_speed, turning_speed));
         }
 
+        //获得/设置视野
+        value_type GetFov() const { return fov_; }
+        void SetFov(value_type fov);
+
+        //获得/设置宽高比
+        value_type GetRatio() const { return ratio_; }
+        void SetRatio(value_type ratio) { ratio_ = ratio; }
+
         //获得视点
         Vec3 GetEye() const { return eye_; }
 
@@ -54,7 +62,7 @@ namespace OGE
         void Reset();
 
         //计算世界坐标六个面
-        void ComputeWorldPlanes();
+        void ComputePlanes();
 
         //返回true表示包围盒可见
         bool Intersect(const BoundingBox& bb);
@@ -67,6 +75,12 @@ namespace OGE
         void ComputePos();
 
 	protected:
+        //视野
+        value_type		fov_;
+
+        //宽高比
+        value_type		ratio_;
+
         //实时位置
         Vec3           eye_;
         Vec3           front_;
@@ -86,13 +100,5 @@ namespace OGE
 
         //转视角速度
         value_type      turning_speed_;
-
-        //世界坐标六个面
-        Plane			near_plane_world_;
-        Plane			far_plane_world_;
-        Plane			bottom_plane_world_;
-        Plane			top_plane_world_;
-        Plane			left_plane_world_;
-        Plane			right_plane_world_;
 	};
 }

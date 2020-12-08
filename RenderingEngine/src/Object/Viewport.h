@@ -40,7 +40,7 @@ namespace OGE
 		//ÊÓ¿Ú¾ØÕó
 		Matrix ViewportMatrix() const
 		{
-			return Matrix::Translate(1.0f, 1.0f, 1.0f) * Matrix::Scale(width_ * 0.5f, height_ * 0.5f, 0.5f) * Matrix::Translate(x_, y_, 0.0f);
+			return  Matrix::Translate(x_, y_, 0.0f) * Matrix::Scale(width_ * 0.5f, height_ * 0.5f, 0.5f) * Matrix::Translate(1.0f, 1.0f, 1.0f);
 		}
 
 	protected:

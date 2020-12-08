@@ -9,7 +9,7 @@ namespace OGE
 	{
 	public:
 		//接收访问者
-		virtual void Accept(SPtr(Visitor) visitor) { visitor->Visit(SPtrCast(Interviewee, Self())); }
+		virtual void Accept(SPtr(Visitor) visitor) { visitor->Visit(SPCast(Interviewee, Self())); }
 
 	protected:
 		Interviewee() :

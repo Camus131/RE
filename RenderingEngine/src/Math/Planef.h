@@ -31,7 +31,7 @@ namespace OGE
         }
 
         //置零
-        void Zero() { SET(0.0f, 0.0f, 0.0f, 0.0f); upper_corner_ = lower_corner_ = 0; }
+        void Zero() { SET(0.0f, 0.0f, 0.0f, 0.0f); max_corner_ = min_corner_ = 0; }
 
         //单位化
         void Normalize()
@@ -129,9 +129,9 @@ namespace OGE
         //返回-1表示包围盒在平面下方
         int Intersect(const BoundingBoxf& bb) const
         {
-            if (Distance(bb.Corner(lower_corner_)) > 0.0f)
+            if (Distance(bb.Corner(min_corner_)) > 0.0f)
                 return 1;
-            if (Distance(bb.Corner(upper_corner_)) < 0.0f)
+            if (Distance(bb.Corner(max_corner_)) < 0.0f)
                 return -1;
             return 0;
         }
@@ -170,17 +170,17 @@ namespace OGE
     protected:
         void ComputeCorners()
         {
-            upper_corner_ = (v_[0] >= 0.0f ? 1 : 0) |
+            max_corner_ = (v_[0] >= 0.0f ? 1 : 0) |
                 (v_[1] >= 0.0f ? 2 : 0) |
                 (v_[2] >= 0.0f ? 4 : 0);
-            lower_corner_ = (~upper_corner_) & 7;
+            min_corner_ = (~max_corner_) & 7;
         }
 
 	protected:
 		value_type		v_[4];
         //加速包围盒相交检测的缓存变量
-        unsigned int    upper_corner_;
-        unsigned int    lower_corner_;
+        unsigned int    max_corner_;
+        unsigned int    min_corner_;
 	};
 
     typedef Planef Plane;

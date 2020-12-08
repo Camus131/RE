@@ -68,7 +68,7 @@ namespace OGE
 			std::map<float, std::vector<SPtr(RenderingUnit)>> transparent_map;
 			for (int i = 0; i < transparent_state_tree_.size(); ++i)
 			{
-				Matrix  model_matrix = SPtrCast(UniformMat, transparent_state_tree_[i]->GetModelMatrixs()->GetUniform("model"))->GetValue();
+				Matrix  model_matrix = SPCast(UniformMat, transparent_state_tree_[i]->GetModelMatrixs()->GetUniform("model"))->GetValue();
 				Vec3 center = transparent_state_tree_[i]->GetLeaf()->GetBoundingBox().Center();
 				center = camera_->ViewMatrix() * model_matrix * center;
 				transparent_map[center.z()].emplace_back(transparent_state_tree_[i]);
@@ -145,7 +145,7 @@ namespace OGE
 		{
 		case OGE_DirLight:
 		{
-			SPtr(DirLight) dir_light = SPtrCast(DirLight, lights_[0]);
+			SPtr(DirLight) dir_light = SPCast(DirLight, lights_[0]);
 			lights_uniforms_->AddUniform(UniformVec3::Create("dirLight.ambient", dir_light->GetAmbient()));
 			lights_uniforms_->AddUniform(UniformVec3::Create("dirLight.diffuse", dir_light->GetDiffuse()));
 			lights_uniforms_->AddUniform(UniformVec3::Create("dirLight.specular", dir_light->GetSpecular()));

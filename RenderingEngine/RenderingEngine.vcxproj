@@ -171,8 +171,8 @@ xcopy /y/r ..\Dependencies\dll\assimp\assimp-vc142-mt64.dll ..\$(Platform)\$(Con
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\DrawingCall.cpp" />
-    <ClCompile Include="src\Core\Frustum.cpp" />
     <ClCompile Include="src\Core\NodeVisitor.cpp" />
+    <ClCompile Include="src\Core\OrthoCamera.cpp" />
     <ClCompile Include="src\Core\PerspectiveCamera.cpp" />
     <ClCompile Include="src\Core\Renderer.cpp" />
     <ClCompile Include="src\Core\StateVisitor.cpp" />
@@ -206,6 +206,7 @@ xcopy /y/r ..\Dependencies\dll\assimp\assimp-vc142-mt64.dll ..\$(Platform)\$(Con
     <ClInclude Include="src\Core\Buffer.h" />
     <ClInclude Include="src\Core\DrawingCall.h" />
     <ClInclude Include="src\Core\NodeVisitor.h" />
+    <ClInclude Include="src\Core\OrthoCamera.h" />
     <ClInclude Include="src\Core\PerspectiveCamera.h" />
     <ClInclude Include="src\Core\Renderer.h" />
     <ClInclude Include="src\Core\RenderingUnit.h" />

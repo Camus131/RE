@@ -24,16 +24,16 @@ namespace OGE
 		switch (object->GetName())
 		{
 		case OGE_Mesh:
-			Process(SPtrCast(Mesh, object));
+			Process(SPCast(Mesh, object));
 			break;
 		case OGE_Cube:
-			Process(SPtrCast(Cube, object));
+			Process(SPCast(Cube, object));
 			break;
 		case OGE_Group:
-			Process(SPtrCast(Group, object));
+			Process(SPCast(Group, object));
 			break;
 		case OGE_Transform:
-			Process(SPtrCast(Transform, object));
+			Process(SPCast(Transform, object));
 			break;
 		}
 	}
@@ -66,7 +66,7 @@ namespace OGE
 			}
 
 			//Ìí¼ÓÖÁ×´Ì¬Ê÷
-			if (OGE::IsEqual(SPtrCast(UniformFloat, unit->GetMaterials()->GetUniform("alpha"))->GetValue(), 1.0f))
+			if (OGE::IsEqual(SPCast(UniformFloat, unit->GetMaterials()->GetUniform("alpha"))->GetValue(), 1.0f))
 				tree_[unit->GetShader()][unit->GetEmissionMap()][unit->GetDiffuseMap()][unit->GetSpecularMap()][unit->GetVAO()].emplace_back(unit);
 			else
 				transparent_tree_.emplace_back(unit);
@@ -114,13 +114,13 @@ namespace OGE
 		switch (mesh->drawing_set_->GetName())
 		{
 		case OGE_DrawElementsUByte:
-			ebo = EBO_UByte::Create(SPtrCast(DrawElementsUByte, mesh->drawing_set_)->GetIndices());
+			ebo = EBO_UByte::Create(SPCast(DrawElementsUByte, mesh->drawing_set_)->GetIndices());
 			break;
 		case OGE_DrawElementsUShort:
-			ebo = EBO_UShort::Create(SPtrCast(DrawElementsUShort, mesh->drawing_set_)->GetIndices());
+			ebo = EBO_UShort::Create(SPCast(DrawElementsUShort, mesh->drawing_set_)->GetIndices());
 			break;
 		case OGE_DrawElementsUInt:
-			ebo = EBO_UInt::Create(SPtrCast(DrawElementsUInt, mesh->drawing_set_)->GetIndices());
+			ebo = EBO_UInt::Create(SPCast(DrawElementsUInt, mesh->drawing_set_)->GetIndices());
 			break;
 		}
 		vao->UnBind();
@@ -197,7 +197,7 @@ namespace OGE
 			}
 
 			//Ìí¼ÓÖÁ×´Ì¬Ê÷
-			if (OGE::IsEqual(SPtrCast(UniformFloat, unit->GetMaterials()->GetUniform("alpha"))->GetValue(), 1.0f))
+			if (OGE::IsEqual(SPCast(UniformFloat, unit->GetMaterials()->GetUniform("alpha"))->GetValue(), 1.0f))
 				tree_[unit->GetShader()][unit->GetEmissionMap()][unit->GetDiffuseMap()][unit->GetSpecularMap()][unit->GetVAO()].emplace_back(unit);
 			else
 				transparent_tree_.emplace_back(unit);

@@ -93,10 +93,10 @@
     <ClCompile Include="src\Core\PerspectiveCamera.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\Core\Frustum.cpp">
+    <ClCompile Include="src\Core\StateVisitor.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="src\Core\StateVisitor.cpp">
+    <ClCompile Include="src\Core\OrthoCamera.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -267,6 +267,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="src\Core\StateVisitor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Core\OrthoCamera.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

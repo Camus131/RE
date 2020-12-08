@@ -10,7 +10,7 @@ namespace OGE
 			if (children_[i] == child)
 				return;
 		}
-		child->parents_.emplace_back(SPtrCast(Group, Self()));
+		child->parents_.emplace_back(SPCast(Group, Self()));
 		children_.emplace_back(child);
 		UpdateBox();
 	}
@@ -24,7 +24,7 @@ namespace OGE
 			{
 				for (auto iter_parent = child->parents_.begin(); iter_parent != child->parents_.end(); ++iter_parent)
 				{
-					if (*iter_parent == SPtrCast(Group, Self()))
+					if (*iter_parent == SPCast(Group, Self()))
 					{
 						child->parents_.erase(iter_parent);
 						break;

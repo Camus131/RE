@@ -26,32 +26,32 @@ namespace OGE
 		{
 		case OGE_UniformInt:
 		{
-			int value = SPtrCast(UniformInt, uniform)->GetValue();
+			int value = SPCast(UniformInt, uniform)->GetValue();
 			glUniform1i(location, value);
 		}break;
 		case OGE_UniformFloat:
 		{
-			float value = SPtrCast(UniformFloat, uniform)->GetValue();
+			float value = SPCast(UniformFloat, uniform)->GetValue();
 			glUniform1f(location, value);
 		}break;
 		case OGE_UniformVec2:
 		{
-			Vec2 value = SPtrCast(UniformVec2, uniform)->GetValue();
+			Vec2 value = SPCast(UniformVec2, uniform)->GetValue();
 			glUniform2fv(location, 1, value.Ptr());
 		}break;
 		case OGE_UniformVec3:
 		{
-			Vec3 value = SPtrCast(UniformVec3, uniform)->GetValue();
+			Vec3 value = SPCast(UniformVec3, uniform)->GetValue();
 			glUniform3fv(location, 1, value.Ptr());
 		}break;
 		case OGE_UniformVec4:
 		{
-			Vec4 value = SPtrCast(UniformVec4, uniform)->GetValue();
+			Vec4 value = SPCast(UniformVec4, uniform)->GetValue();
 			glUniform4fv(location, 1, value.Ptr());
 		}break;
 		case OGE_UniformMat:
 		{
-			Matrix value = SPtrCast(UniformMat, uniform)->GetValue();
+			Matrix value = SPCast(UniformMat, uniform)->GetValue();
 			glUniformMatrix4fv(location, 1, GL_FALSE, value.Ptr());
 		}break;
 		}

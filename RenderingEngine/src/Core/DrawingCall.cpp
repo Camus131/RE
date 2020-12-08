@@ -12,7 +12,7 @@ namespace OGE
 		{
 		case OGE_DrawArrays:
 		{
-			SPtr(DrawArrays) draw_arrays = SPtrCast(DrawArrays, drawing_set_);
+			SPtr(DrawArrays) draw_arrays = SPCast(DrawArrays, drawing_set_);
 			DrawArrays::DrawSegments segments_map = draw_arrays->GetAllSegments();
 			DrawArrays::Mode mode = draw_arrays->GetMode();
 			int instanced_num = draw_arrays->GetInstancedNum();
@@ -50,7 +50,7 @@ namespace OGE
 		}break;
 		case OGE_DrawElementsUByte:
 		{
-			SPtr(DrawElementsUByte) draw_elements = SPtrCast(DrawElementsUByte, drawing_set_);
+			SPtr(DrawElementsUByte) draw_elements = SPCast(DrawElementsUByte, drawing_set_);
 			DrawElementsUByte::DrawSegments segments_map = draw_elements->GetAllSegments();
 			DrawElementsUByte::Mode mode = draw_elements->GetMode();
 			int instanced_num = draw_elements->GetInstancedNum();
@@ -92,7 +92,7 @@ namespace OGE
 		}break;
 		case OGE_DrawElementsUShort:
 		{
-			SPtr(DrawElementsUShort) draw_elements = SPtrCast(DrawElementsUShort, drawing_set_);
+			SPtr(DrawElementsUShort) draw_elements = SPCast(DrawElementsUShort, drawing_set_);
 			DrawElementsUShort::DrawSegments segments_map = draw_elements->GetAllSegments();
 			DrawElementsUShort::Mode mode = draw_elements->GetMode();
 			int instanced_num = draw_elements->GetInstancedNum();
@@ -134,7 +134,7 @@ namespace OGE
 		}break;
 		case OGE_DrawElementsUInt:
 		{
-			SPtr(DrawElementsUInt) draw_elements = SPtrCast(DrawElementsUInt, drawing_set_);
+			SPtr(DrawElementsUInt) draw_elements = SPCast(DrawElementsUInt, drawing_set_);
 			DrawElementsUInt::DrawSegments segments_map = draw_elements->GetAllSegments();
 			DrawElementsUInt::Mode mode = draw_elements->GetMode();
 			int instanced_num = draw_elements->GetInstancedNum();
